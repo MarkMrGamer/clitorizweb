@@ -1,5 +1,7 @@
 <?php
+if(!isset($_SESSION["user"])) { 
 $username = $_SESSION["user"];
+}
 ?>
 
 <table class="banner" width="440">
