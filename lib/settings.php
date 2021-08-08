@@ -76,6 +76,8 @@ if (isset($_POST["update"])) {
 	    }
 }
 
+?>
+
 /*
 DOOM - this will sit in the comment zone for now
 
@@ -89,5 +91,5 @@ if (isset($_POST["update_pfp"])) {
 	
     }
 }
-?>
+
 */
