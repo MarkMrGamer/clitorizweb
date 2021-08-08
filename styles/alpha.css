@@ -1,0 +1,26 @@
+.loginSubmit {
+    border: black solid 1px;
+    font-size: 11px;
+    height: 23px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+.loginText {
+    background-color: white;
+    border: black solid 1px;
+    height: 16px;
+    width: 150px;
+    font-family: Verdana;
+    font-size: 12px;
+}
+.hmcontainer {
+    background-color: white;
+    border: black solid 1px;
+    margin-top: 5px;
+}
+label {
+    font-size: 11px;
+    font-family: Verdana;
+    color: black;
+    padding: 5px;
+}
