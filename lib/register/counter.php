@@ -12,10 +12,11 @@ switch($counter) {
 	   echo "Your username can't have any special characters.";
 	   break;
 	case 4:
-	   echo "Successfully registered!";
+	   header("Location: login.php");
 	   break;
 	case 5:
 	   echo "Username already taken.";
 	   break;
 }
+
 ?>
