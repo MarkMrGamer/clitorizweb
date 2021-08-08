@@ -21,9 +21,7 @@
 <label>status:</label> <input class="UpdateText" type="text" name="status" value="<?php echo $user["status"]; ?>"><br><br>
 <label style="vertical-align: top;">css:</label> <textarea name="css" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["css"]; ?></textarea><br><br>
 <label style="vertical-align: top;">bio:</label> <textarea name="bio" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["bio"]; ?></textarea><br><br>
-<label>profile picture:</label> <input type="file" name="fileupload" id="fileupload"> <input class="updateSubmit" type="submit" name="update_pfp" value="Update Picture"><br><br>
-<label>audio profile:</label> <input type="file" name="fileupload2" id="fileupload2"> <input class="updateSubmit" type="submit" name="update_audio" value="Update Audio"><br>
-<br><br><input class="updateSubmit" type="submit" name="update" value="Update"></form>
+<br><br><input class="updateSubmit" type="submit" name="update" value="Update"></form><label>this will update audio,pfp,css and bio</label>
 <br>
 <?php require("lib/settings/counter.php"); ?>
 </td>
