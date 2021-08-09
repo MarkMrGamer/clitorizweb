@@ -21,7 +21,7 @@ if (isset($_POST["update"])) {
 
 if (isset($_FILES["fileupload2"])) {
 	
-	//Trashed code..
+	//audio
 	if ($_FILES['fileupload2']['name'] == "") {
 		$counter = 6;
 	} else {
@@ -49,7 +49,7 @@ if (isset($_FILES["fileupload2"])) {
 
 if (isset($_FILES["fileupload"])) {
 	
-	//Trashed code..
+	//pfps
 	if ($_FILES['fileupload']['name'] == "") {
 		$counter = 3;
 	} else {
