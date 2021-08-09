@@ -15,4 +15,4 @@ $username = $_SESSION["user"];
 </td></tr>
 </tbody>
 </table>
-<img class="banner" src="/images/banner.gif">
+<div class="banner-image"></div>
