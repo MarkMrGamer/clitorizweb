@@ -96,16 +96,24 @@ function GetUsers($conn) {
 }
 function GetThreads($conn) {
 	global $threads;
-    $threads = $conn->query("SELECT * FROM clitorizweb_threads");
+    $threads = $conn->query("SELECT * FROM clitorizweb_threads ORDER BY thread_id DESC");
 	return $threads;
 }
 function GetThreadsFromForumName($forum, $conn) {
 	global $threads;
-    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ?");
+    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_id DESC");
 	$query->bind_param("s", $forum);
 	$query->execute();
 	$threads = $query->get_result();
 	return $threads;
+}
+function GetReply($id, $conn) {
+	global $replies;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_replies WHERE post_id = ?");
+	$query->bind_param("i", $id);
+	$query->execute();
+	$replies = $query->get_result();
+	return $replies;
 }
 function GetRepliesFromThread($thread_name, $conn) {
 	global $replies;
@@ -247,10 +255,38 @@ function GetPostAuthor($author2, $conn) {
 	$replies_author = $query->get_result();
 	return $replies_author;
 }
-function DeleteReply($post_id, $conn) {
+function DeleteReply($id, $conn) {
 	$query = $conn->prepare("DELETE FROM clitorizweb_replies WHERE post_id = ?");
-	$query->bind_param("i", $post_id); 
+	$query->bind_param("i", $id); 
 	$query->execute();
 	return true;
+}
+function DeleteRepliesFromThread($thread_id, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_replies WHERE post_thread = ?");
+	$query->bind_param("i", $thread_id); 
+	$query->execute();
+	return true;
+}
+function DeleteThread($thread_id, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_threads WHERE thread_id = ?");
+	$query->bind_param("i", $thread_id); 
+	$query->execute();
+	return true;
+}
+function GetThreadFromAuthor($author_name, $conn) {
+	global $post_counter;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_author = ?");
+	$query->bind_param("s", $author_name); 
+	$query->execute();
+	$post_counter = $query->get_result();
+	return $post_counter;
+}
+function GetRepliesFromAuthor($author_name, $conn) {
+	global $post_counter2;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_replies WHERE post_author = ?");
+	$query->bind_param("s", $author_name); 
+	$query->execute();
+	$post_counter2 = $query->get_result();
+	return $post_counter2;
 }
 ?>
