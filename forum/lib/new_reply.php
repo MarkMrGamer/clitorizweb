@@ -15,12 +15,10 @@ if (isset($_GET["id"])) {
 	}
 }
 
-if (!isset($_GET["id"])) { 
-    header("Location: /forum/");
-}
-
 if (isset($_POST["create"])) {
-
+    if (!isset($_GET["id"])) { 
+        header("Location: /forum/");
+    }
     $author = $_SESSION["user"];
     $text = htmlspecialchars($_POST["text"]);
 	

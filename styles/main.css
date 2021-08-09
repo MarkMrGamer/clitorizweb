@@ -59,6 +59,13 @@ td.blackstrip {
     background-color: black;
 }
 
+td.blackstrip4 {
+    font-size: 10px;
+    font-family: Verdana;
+    font-weight: bold;
+    color: white;
+}
+
 td.blackstrip3 {
     font-size: 10px;
     font-family: Verdana;
@@ -67,12 +74,18 @@ td.blackstrip3 {
     padding-left: 3px;
 }
 
+
 img.pfp {
     border: black solid 1px;
 	width: 64px;
 	height: 64px;
 }
 
+.banner-image {
+    background-image: url(/images/banner.gif);
+    width: 440px;
+    height: 68px;
+}
 img.banner {
 	width: 440px;
 	height: 68px;
