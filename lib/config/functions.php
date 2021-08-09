@@ -94,6 +94,35 @@ function GetUsers($conn) {
     $users = $conn->query("SELECT * FROM clitorizweb_users");
 	return $users;
 }
+function GetThreads($conn) {
+	global $threads;
+    $threads = $conn->query("SELECT * FROM clitorizweb_threads");
+	return $threads;
+}
+function GetThreadsFromForumName($forum, $conn) {
+	global $threads;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ?");
+	$query->bind_param("s", $forum);
+	$query->execute();
+	$threads = $query->get_result();
+	return $threads;
+}
+function GetRepliesFromThread($thread_name, $conn) {
+	global $replies;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_replies WHERE post_thread = ?");
+	$query->bind_param("i", $thread_name);
+	$query->execute();
+	$replies = $query->get_result();
+	return $replies;
+}
+function GetRepliesFromThreadName($id, $conn) {
+	global $replies;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_replies WHERE post_thread = ?");
+	$query->bind_param("i", $id);
+	$query->execute();
+	$replies = $query->get_result();
+	return $replies;
+}
 function GetFriends($friend_name, $friend_status, $conn) {
 	global $friend;
 	$query = $conn->prepare("SELECT * FROM clitorizweb_friends WHERE buddy1 = ? AND status = ?");
@@ -174,6 +203,18 @@ function AcceptFriend($buddy1, $buddy2, $status2, $conn) {
 	$query->execute();
 	return true;
 }
+function CreateThread($title, $text, $author, $forum, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_threads (thread_title, thread_text, thread_author, thread_forum) VALUES (?,?,?,?)");
+	$query->bind_param("ssss", $title, $text, $author, $forum); 
+	$query->execute();
+	return true;
+}
+function CreateReply($text, $author, $id, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_replies (post_text, post_author, post_thread) VALUES (?,?,?)");
+	$query->bind_param("ssi", $text, $author, $id); 
+	$query->execute();
+	return true;
+}
 function GetProfile($name, $conn) {
 	global $user;
 	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
@@ -181,5 +222,35 @@ function GetProfile($name, $conn) {
 	$query->execute();
 	$user = $query->get_result();
 	return $user;
+}
+function GetThread($id, $conn) {
+	global $thread;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_id = ?");
+	$query->bind_param("i", $id); 
+	$query->execute();
+	$thread = $query->get_result();
+	return $thread;
+}
+function GetThreadAuthor($author, $conn) {
+	global $thread_author;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $author); 
+	$query->execute();
+	$thread_author = $query->get_result();
+	return $thread_author;
+}
+function GetPostAuthor($author2, $conn) {
+	global $replies_author;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $author2); 
+	$query->execute();
+	$replies_author = $query->get_result();
+	return $replies_author;
+}
+function DeleteReply($post_id, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_replies WHERE post_id = ?");
+	$query->bind_param("i", $post_id); 
+	$query->execute();
+	return true;
 }
 ?>
