@@ -8,8 +8,6 @@ $user = NULL;
 $get = NULL;
 GetCurrentUser($username, $conn);
 
-//DOOM - im gonna merge all because its stupid
-
 if (isset($_POST["update"])) {
 	$status = htmlspecialchars($_POST["status"]);
 	$css = htmlspecialchars($_POST["css"]);
@@ -19,8 +17,11 @@ if (isset($_POST["update"])) {
 	$bio = htmlspecialchars($_POST["bio"]);
 	UpdateProfile($username, $status, $bio, $newcss, $conn);
 	header("Location: settings.php");
+}
+
+if (isset($_FILES["fileupload2"])) {
 	
-	//audio
+	//Trashed code..
 	if ($_FILES['fileupload2']['name'] == "") {
 		$counter = 6;
 	} else {
@@ -44,8 +45,11 @@ if (isset($_POST["update"])) {
 		    }
 	    }
     }
+}
+
+if (isset($_FILES["fileupload"])) {
 	
-	//pfp
+	//Trashed code..
 	if ($_FILES['fileupload']['name'] == "") {
 		$counter = 3;
 	} else {
@@ -74,22 +78,6 @@ if (isset($_POST["update"])) {
 			    header("Location: settings.php");
 		    }
 	    }
-}
-
-?>
-
-/*
-DOOM - this will sit in the comment zone for now
-
-if (isset($_POST["update_audio"])) {
-	
-	
-}
-
-if (isset($_POST["update_pfp"])) {
-	
-	
     }
 }
-
-*/
+?>
