@@ -5,7 +5,7 @@
 .UserProfile {
     vertical-align: top;
     padding-left: 5px;
-    line-break: auto;
+    word-break: break-word;
 }
 
 .organize {
@@ -16,6 +16,18 @@
     border-collapse: collapse;
     border-color: black;
     color: black;
+}
+
+.Profile {
+    vertical-align: top;
+    word-break: break-word;
+	white-space:pre-wrap;
+}
+
+
+.Profile a {
+	text-decoration: none;
+	color: black;
 }
 
 .UserProfile a {
