@@ -21,9 +21,9 @@
 <td class="hmcontainer2"><table><tbody><tr><td><img class="pfp" alt="" src="<?php require("lib/pfp2.php"); ?>"><br>
 </td>
 <td style="vertical-align: top;"><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $details["username"]; ?>"><?php echo $details["username"]; ?></a></font> <?php if (!empty($details['badge'])) { ?><img src="<?php $badge = $details['badge']; require("lib/badge.php"); ?>"><?php } ?> <?php require("lib/friend2.php"); ?><br>
-<font class="UserProfile" size="-2"><?php if (!empty($details["status"])) { echo $details["status"]; } ?></font>
+<font class="UserProfile" size="-2"><?php if (!empty($details["status"])) { echo $details["status"]; } ?></font><br>
 <img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png">
-<font class="UserProfile" size="-2"><b>Member</b></font></td></tr></tbody></table></td>
+<br><font class="UserProfile" size="-2"><b>Member</b></font></td></tr></tbody></table></td>
 </tr>
 </tbody>
 </table>
