@@ -98,6 +98,7 @@ if (isset($_SESSION["user"]) && $details["username"] == $_SESSION["user"]) {
 <?php
 }
 ?>
+
 </tbody></table></td>
 </tr>
 </tbody>
@@ -177,6 +178,21 @@ if ($friend2->num_rows > 0) {
 <?php
 }
 ?>
+</div>
+<div class="video">
+<table class="BorderStrip" border="1" width="230">
+<tbody><tr class="blackstrip3" height="20">
+<td class="blackstrip3">Video Player</td>
+</tr>
+
+<tr class="hmcontainer">
+<td class="hmcontainer2"><table><tbody><tr>
+</tr><tr><td>
+abac
+</tbody></table></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <?php require("lib/require/footer/footer.php"); ?>
