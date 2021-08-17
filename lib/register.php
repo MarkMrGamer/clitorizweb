@@ -22,6 +22,7 @@ $password_one = $_POST["password_one"];
 $password_two = $_POST["password_two"];
 $password_hashed = password_hash($password_one, PASSWORD_DEFAULT);
 $song = rand(1, 3);
+$video = rand(1, 2);
 $profile_picture = rand(1, 27);
 $result = NULL;
 
@@ -53,7 +54,7 @@ CheckDB($username, $conn);
 		$counter = 2;
 		break;
 		default:
-		InsertUser($username, $password_hashed, $email, $profile_picture, $song, $conn);
+		InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $conn);
 		$counter = 4;
     }
 }

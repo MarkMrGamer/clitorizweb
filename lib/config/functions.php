@@ -53,9 +53,21 @@ function GetUserFriend2($friend_details3, $conn) {
 	return $get_friend2;
 	return $friend_details4;
 }
-function InsertUser($username, $password_hashed, $email, $profile_picture, $song, $conn) {
-	$query = $conn->prepare("INSERT INTO clitorizweb_users (username, password, email, pfp, song) VALUES (?,?,?,?,?)");
-	$query->bind_param("sssii", $username, $password_hashed, $email, $profile_picture, $song); 
+function InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_users (username, password, email, pfp, song, video) VALUES (?,?,?,?,?,?)");
+	$query->bind_param("sssiii", $username, $password_hashed, $email, $profile_picture, $song, $video); 
+	$query->execute();
+	return true;
+}
+function AddBadge($badge_name, $newfile2, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_badges (badge_name, badge_pic) VALUES (?,?)");
+	$query->bind_param("ss", $badge_name, $newfile2); 
+	$query->execute();
+	return true;
+}
+function ReportUser($report_username, $reason, $short_desc, $username, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_reports (report_name, report_reason, report_description, user_reporter) VALUES (?,?,?,?)");
+	$query->bind_param("ssss", $report_username, $reason, $short_desc, $username); 
 	$query->execute();
 	return true;
 }
@@ -65,9 +77,45 @@ function UpdateProfile($username, $status, $bio, $newcss, $conn) {
 	$query->execute();
 	return true;
 }
-function UpdateProfilePicture($pfp, $username, $conn) {
-	$query = $conn->prepare("UPDATE clitorizweb_users SET pfp = ? WHERE username = ?");
-	$query->bind_param("is", $pfp, $username); 
+function UpdateRank($username, $badge, $custom_rank, $custom_stars_converter, $custom_badge, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET badge = ?, custom_rank = ?, custom_stars = ?, custom_badge = ? WHERE username = ?");
+	$query->bind_param("ssiss", $badge, $custom_rank, $custom_stars_converter, $custom_badge, $username); 
+	$query->execute();
+	return true;
+}
+function UpdateRank2($username, $badge, $custom_rank, $custom_stars, $custom_badge, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET badge = ?, custom_rank = ?, custom_stars = ?, custom_badge = ? WHERE username = ?");
+	$query->bind_param("ssiss", $badge, $custom_rank, $custom_stars, $custom_badge, $username); 
+	$query->execute();
+	return true;
+}
+function AddCooldown($author, $time, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET forum_cooldown = ? WHERE username = ?");
+	$query->bind_param("ss", $time, $author); 
+	$query->execute();
+	return true;
+}
+function PinThread($thread_id, $thread_pin, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_threads SET thread_pinned = ? WHERE thread_id = ?");
+	$query->bind_param("si", $thread_pin, $thread_id); 
+	$query->execute();
+	return true;
+}
+function LockThread($thread_id, $thread_lock, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_threads SET thread_locked = ? WHERE thread_id = ?");
+	$query->bind_param("si", $thread_lock, $thread_id); 
+	$query->execute();
+	return true;
+}
+function UnlockThread($thread_id, $thread_lock, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_threads SET thread_locked = ? WHERE thread_id = ?");
+	$query->bind_param("si", $thread_lock, $thread_id); 
+	$query->execute();
+	return true;
+}
+function UnPinThread($thread_id, $thread_pin, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_threads SET thread_pinned = ? WHERE thread_id = ?");
+	$query->bind_param("si", $thread_pin, $thread_id); 
 	$query->execute();
 	return true;
 }
@@ -77,9 +125,21 @@ function UpdateUsersZeroPFP($pfp_id, $user_pfp, $conn) {
 	$query->execute();
 	return true;
 }
+function UpdateProfilePicture($pfp, $username, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET pfp = ? WHERE username = ?");
+	$query->bind_param("is", $pfp, $username); 
+	$query->execute();
+	return true;
+}
 function UpdateUsersZeroSong($song_id, $user_song, $conn) {
 	$query = $conn->prepare("UPDATE clitorizweb_users SET song = ? WHERE username = ?");
 	$query->bind_param("is", $song_id, $user_song); 
+	$query->execute();
+	return true;
+}
+function UpdateUsersZeroVideo($video_id, $user_video, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET video = ? WHERE username = ?");
+	$query->bind_param("is", $video_id, $user_video); 
 	$query->execute();
 	return true;
 }
@@ -89,23 +149,56 @@ function UpdateAudioProfile($song, $username, $conn) {
 	$query->execute();
 	return true;
 }
+function UpdateVideoProfile($video, $username, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET video = ? WHERE username = ?");
+	$query->bind_param("is", $video, $username); 
+	$query->execute();
+	return true;
+}
+function AnnounceMessage($announce_text, $announce_bgcolor, $announce_textcolor, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_banner SET bannertext = ?, textcolor = ?, bannercolor = ?");
+	$query->bind_param("sss", $announce_text, $announce_bgcolor, $announce_textcolor); 
+	$query->execute();
+	return true;
+}
 function GetUsers($conn) {
 	global $users;
     $users = $conn->query("SELECT * FROM clitorizweb_users");
 	return $users;
 }
+function GetCustomBadges($conn) {
+	global $custom_badges;
+    $custom_badges = $conn->query("SELECT * FROM clitorizweb_badges");
+	return $custom_badges;
+}
+function GetCustomBadge($custom_badge, $conn) {
+	global $get_custom_badge;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_badges WHERE badge_name = ?");
+	$query->bind_param("s", $custom_badge);
+	$query->execute();
+	$get_custom_badge = $query->get_result();
+	return $get_custom_badge;
+}
 function GetThreads($conn) {
 	global $threads;
-    $threads = $conn->query("SELECT * FROM clitorizweb_threads ORDER BY thread_id DESC");
+    $threads = $conn->query("SELECT * FROM clitorizweb_threads ORDER BY thread_pinned DESC");
 	return $threads;
 }
 function GetThreadsFromForumName($forum, $conn) {
 	global $threads;
-    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_id DESC");
+    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_pinned DESC, thread_date DESC");
 	$query->bind_param("s", $forum);
 	$query->execute();
 	$threads = $query->get_result();
 	return $threads;
+}
+function GetThreadsFromForumName2($forum2, $conn) {
+	global $threads2;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_pinned DESC");
+	$query->bind_param("s", $forum2);
+	$query->execute();
+	$threads2 = $query->get_result();
+	return $threads2;
 }
 function GetReply($id, $conn) {
 	global $replies;

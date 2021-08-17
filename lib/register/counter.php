@@ -18,5 +18,4 @@ switch($counter) {
 	   echo "Username already taken.";
 	   break;
 }
-
 ?>
