@@ -16,6 +16,7 @@
     border-collapse: collapse;
     border-color: black;
     color: black;
+	border: 1px black solid;
 }
 
 .Profile {
@@ -24,6 +25,14 @@
 	white-space:pre-wrap;
 }
 
+.banner-alert {
+    font-family: Verdana;
+    font-size: 14px;
+    font-weight: bold;
+    border: black 1px solid;
+    text-align: center;
+    margin-top: 5px;
+}
 
 .Profile a {
 	text-decoration: none;
@@ -126,6 +135,9 @@ td.blackstrip2 {
 }
 audio {
   background: #f1f3f4;
+  border: solid 1px black;
+}
+video {
   border: solid 1px black;
 }
 .updateText {

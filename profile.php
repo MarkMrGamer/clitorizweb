@@ -2,6 +2,7 @@
 <?php require("lib/config/database.php"); ?>
 <?php require("lib/config/functions.php"); ?>
 <?php require("lib/profile.php"); ?>
+<?php require("forum/lib/forum_post_counter3.php"); ?>
 <html>
 <head>
 <title>clitorizweb - <?php echo $details["username"]; ?></title>
@@ -20,16 +21,14 @@
 <tr>
 <td class="hmcontainer2"><table><tbody><tr><td><img class="pfp" alt="" src="<?php require("lib/pfp2.php"); ?>"><br>
 </td>
-<td style="vertical-align: top;"><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $details["username"]; ?>"><?php echo $details["username"]; ?></a></font> <?php if (!empty($details['badge'])) { ?><img src="<?php $badge = $details['badge']; require("lib/badge.php"); ?>"><?php } ?> <?php require("lib/friend2.php"); ?><br>
-<font class="UserProfile" size="-2"><?php if (!empty($details["status"])) { echo $details["status"]; } ?></font><br>
-<img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png"><img src="../images/star.png">
-<br><font class="UserProfile" size="-2"><b>Member</b></font></td></tr></tbody></table></td>
+<td style="vertical-align: top;"><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $details["username"]; ?>"><?php echo $details["username"]; ?></a></font> <?php if (!empty($details['badge'])) { ?><img src="<?php $custom_badge = $details['custom_badge']; $badge = $details['badge']; require("lib/badge.php"); ?>"><?php } ?> <?php require("lib/friend2.php"); ?><br>
+<?php if (!empty($details["status"])) { ?><font class="UserProfile" size="-2"><?php echo $details["status"]; ?></font><br><?php } ?><?php $counter_posts = $post_counter3; $custom_stars = $details["custom_stars"]; $custom_rank = $details["custom_rank"]; require("lib/rank.php"); ?></font></td></tr></tbody></table></td>
 </tr>
 </tbody>
 </table>
 <div class="container">
   <div class="about">
-<table width="230" class="BorderStrip" border="1">
+<table width="230" class="BorderStrip">
 <tbody><tr class="blackstrip3" height="20">
 <td class="blackstrip3">
  About <?php echo $details["username"]; ?>
@@ -45,7 +44,7 @@
 </table>
 </div>
   <div class="media-player">
-<table class="BorderStrip" width="205" border="1">
+<table class="BorderStrip" width="205">
 <tbody><tr class="blackstrip3" height="20">
 <td class="blackstrip3">Media Player
 </td>
@@ -64,7 +63,7 @@
 </table>
 </div>
   <div class="contact">
-<table class="BorderStrip" border="1" width="205">
+<table class="BorderStrip" width="205">
 <tbody><tr class="blackstrip3" height="20">
 <td class="blackstrip3">Contact <?php echo $details["username"]; ?>
 </td>
@@ -98,7 +97,6 @@ if (isset($_SESSION["user"]) && $details["username"] == $_SESSION["user"]) {
 <?php
 }
 ?>
-
 </tbody></table></td>
 </tr>
 </tbody>
@@ -125,7 +123,7 @@ if (isset($_SESSION["user"]) && $details["username"] == $_SESSION["user"]) {
 <?php 
 if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
 ?>
-<table class="BorderStrip" border="1" width="230">
+<table class="BorderStrip" width="230">
 <tbody><tr class="blackstrip3" height="20">
 <td class="blackstrip3">Friends</td>
 </tr>
@@ -179,8 +177,11 @@ if ($friend2->num_rows > 0) {
 }
 ?>
 </div>
+<?php 
+if ($details["video_access"] == "true") {
+?>
 <div class="video">
-<table class="BorderStrip" border="1" width="230">
+<table class="BorderStrip" width="205">
 <tbody><tr class="blackstrip3" height="20">
 <td class="blackstrip3">Video Player</td>
 </tr>
@@ -188,12 +189,18 @@ if ($friend2->num_rows > 0) {
 <tr class="hmcontainer">
 <td class="hmcontainer2"><table><tbody><tr>
 </tr><tr><td>
-abac
+<video width="190" height="100" controls>
+  <source src=<?php require("lib/video.php"); ?> type="video/mp4">
+Video element not supported on this browser
+</video>
 </tbody></table></td>
 </tr>
 </tbody>
 </table>
 </div>
+<?php 
+}
+?>
 </div>
 <?php require("lib/require/footer/footer.php"); ?>
 </center>

@@ -21,8 +21,9 @@
 <label>status:</label> <input class="UpdateText" type="text" name="status" value="<?php echo $user["status"]; ?>"><br><br>
 <label style="vertical-align: top;">css:</label> <textarea name="css" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["css"]; ?></textarea><br><br>
 <label style="vertical-align: top;">bio:</label> <textarea name="bio" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["bio"]; ?></textarea><br><br>
-<label>profile picture:</label> <input type="file" name="fileupload" id="fileupload"><br><br>
-<label>audio profile:</label> <input type="file" name="fileupload2" id="fileupload2"><br>
+<label>profile picture:</label> <input type="file" name="fileupload" id="fileupload"><input class="updateSubmit" type="submit" name="clear1" value="clear"><br><br>
+<label>audio profile:</label> <input type="file" name="fileupload2" id="fileupload2"><input class="updateSubmit" type="submit" name="clear2" value="clear"><br>
+<?php if ($user["video_access"] == "true") { ?><br><label>video profile:</label> <input type="file" name="fileupload3" id="fileupload3"><input class="updateSubmit" type="submit" name="clear3" value="clear"><br><?php } ?>
 <br><br><input class="updateSubmit" type="submit" name="update" value="Update"></form>
 <br>
 <?php require("lib/settings/counter.php"); ?>

@@ -6,9 +6,9 @@ if (isset($_SESSION["alpha"])) {
 if (isset($_POST["auth"])) {
 	$password = $_POST["password"];
 	
-	if ($password != "webgrenades2334") {
+	if ($password != "peniznetreborn3892") {
 		header("Location: /");
-    } elseif ($password = "webgrenades2334") {
+    } elseif ($password = "peniznetreborn3892") {
 		$_SESSION["alpha"] = rand(1000,9999);
 		header("Location: index2.php");
 	} else {

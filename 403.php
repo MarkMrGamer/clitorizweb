@@ -12,7 +12,7 @@
 <table class="hmcontainer" width="440">
 <tbody>
 <tr>
-<td class="hmcontainer2"><font size="+1"><b>404 - Page Not Found</b></font><br><br>This page does not exist or can't be found.</td>
+<td class="hmcontainer2"><font size="+1"><b>403 - Forbidden</b></font><br><br>This page can't be accessed.</td>
 </tr>
 </tbody>
 </table>
