@@ -8,6 +8,11 @@ if (isset($_GET["id"])) {
 		
 		$threads = NULL;
         GetThreadsFromForumName($forum, $conn);
+	} elseif ($_GET["id"] == 2) {
+		$forum = "halflife";
+		
+		$threads = NULL;
+        GetThreadsFromForumName($forum, $conn);
 	} else {
 		header("Location: /forum/");
 	}

@@ -23,6 +23,13 @@
 <td class="hmcontainer2" height="39" width="51"><table align="center"><tbody><tr>
 <td><font class="UserProfile" size="-2"><?php echo $show_threads; ?></font>
 </td></tr></tbody></table></td></tr>
+<tr class="hmcontainer">
+<td class="hmcontainer2" height="39"><table><tbody><tr>
+<td><font class="UserProfile" size="2"><a href="/forum/forum.php?id=2"><b>Half-Life</b></a></font>
+<br><font class="UserProfile" size="1">Gordon Freeman in the flesh, or rather in the forums.</font></td></tr></tbody></table></td>
+<td class="hmcontainer2" height="39" width="51"><table align="center"><tbody><tr>
+<td><font class="UserProfile" size="-2"><?php echo $show_threads2; ?></font>
+</td></tr></tbody></table></td></tr>
 </tbody>
 </table>
 </div>

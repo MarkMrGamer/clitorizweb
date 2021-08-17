@@ -8,5 +8,8 @@ switch($counter) {
 	case 2:
 	   header("Location: thread.php?id=" . $_GET["id"]);
 	   break;
+	case 3:
+	   echo "You have a 30 second cooldown.";
+	   break;
 }
 ?>

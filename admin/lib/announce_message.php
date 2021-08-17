@@ -1,0 +1,20 @@
+<?php
+// This php script
+// makes administrator able to announce 
+// what is happen to clitorizweb or idk
+
+if (isset($_POST["clear"])) {
+	$announce_text = "";
+	$announce_bgcolor = "";
+	$announce_textcolor = "";
+    AnnounceMessage($announce_text, $announce_bgcolor, $announce_textcolor, $conn);
+}
+
+if (isset($_POST["announce"])) {
+	$announce_text = htmlspecialchars($_POST["text_announce"]);
+	$announce_bgcolor = htmlspecialchars($_POST["bgcolor_announce"]);
+	$announce_textcolor = htmlspecialchars($_POST["textcolor_announce"]);
+	AnnounceMessage($announce_text, $announce_bgcolor, $announce_textcolor, $conn);
+	header("Location: announce_message.php");
+}
+?>
