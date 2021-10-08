@@ -1,5 +1,5 @@
 <?php
-session_destroy();
+$_SESSION["user"] = NULL;
 header('Location: /');
 exit();
 ?>

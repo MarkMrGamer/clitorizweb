@@ -34,6 +34,13 @@ if (isset($_POST["add"])) {
 		    break;
 		    default:
 		    if (move_uploaded_file($_FILES["fileupload"]["tmp_name"], $newfile)) {
+	            // add log 
+	            $user_log = $_SESSION['user'];
+	            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	                $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                }
+	            AddLog("<b>$user_log</b> added a custom badge called $badge_name", $ip, $conn);
 			    AddBadge($badge_name, $newfile2, $conn);
 			    $counter = 4;
 		    }

@@ -53,9 +53,9 @@ function GetUserFriend2($friend_details3, $conn) {
 	return $get_friend2;
 	return $friend_details4;
 }
-function InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $conn) {
-	$query = $conn->prepare("INSERT INTO clitorizweb_users (username, password, email, pfp, song, video) VALUES (?,?,?,?,?,?)");
-	$query->bind_param("sssiii", $username, $password_hashed, $email, $profile_picture, $song, $video); 
+function InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $ip, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_users (username, password, email, pfp, song, video, ip) VALUES (?,?,?,?,?,?,?)");
+	$query->bind_param("sssiiis", $username, $password_hashed, $email, $profile_picture, $song, $video, $ip); 
 	$query->execute();
 	return true;
 }
@@ -71,9 +71,33 @@ function ReportUser($report_username, $reason, $short_desc, $username, $conn) {
 	$query->execute();
 	return true;
 }
+function AddBan($ban_username, $ban_date, $ban_note, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_bans (ban_date, ban_note, ban_username) VALUES (?,?,?)");
+	$query->bind_param("sss", $ban_date, $ban_note, $ban_username); 
+	$query->execute();
+	return true;
+}
+function AddComment($username, $comment, $user, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_comments (comment_username, comment_description, comment_profile) VALUES (?,?,?)");
+	$query->bind_param("sss", $username, $comment, $user); 
+	$query->execute();
+	return true;
+}
 function UpdateProfile($username, $status, $bio, $newcss, $conn) {
 	$query = $conn->prepare("UPDATE clitorizweb_users SET css = ?, bio = ?, status = ? WHERE username = ?");
 	$query->bind_param("ssss", $newcss, $bio, $status, $username); 
+	$query->execute();
+	return true;
+}
+function ChangeBan($ban_username, $ban, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET isbanned = ? WHERE username = ?");
+	$query->bind_param("ss", $ban, $ban_username); 
+	$query->execute();
+	return true;
+}
+function ChangePassword($hash, $name, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET password = ? WHERE username = ?");
+	$query->bind_param("ss", $hash, $name); 
 	$query->execute();
 	return true;
 }
@@ -92,6 +116,12 @@ function UpdateRank2($username, $badge, $custom_rank, $custom_stars, $custom_bad
 function AddCooldown($author, $time, $conn) {
 	$query = $conn->prepare("UPDATE clitorizweb_users SET forum_cooldown = ? WHERE username = ?");
 	$query->bind_param("ss", $time, $author); 
+	$query->execute();
+	return true;
+}
+function AddCooldown2($username, $time, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET comment_cooldown = ? WHERE username = ?");
+	$query->bind_param("ss", $time, $username); 
 	$query->execute();
 	return true;
 }
@@ -143,9 +173,9 @@ function UpdateUsersZeroVideo($video_id, $user_video, $conn) {
 	$query->execute();
 	return true;
 }
-function UpdateAudioProfile($song, $username, $conn) {
-	$query = $conn->prepare("UPDATE clitorizweb_users SET song = ? WHERE username = ?");
-	$query->bind_param("is", $song, $username); 
+function UpdateAudioProfile($song, $audioFileType, $username, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET song = ?, audio_file_type = ? WHERE username = ?");
+	$query->bind_param("iss", $song, $audioFileType, $username); 
 	$query->execute();
 	return true;
 }
@@ -161,9 +191,18 @@ function AnnounceMessage($announce_text, $announce_bgcolor, $announce_textcolor,
 	$query->execute();
 	return true;
 }
-function GetUsers($conn) {
+function UpdateIPLogin($username2, $ip, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET ip = ? WHERE username = ?");
+	$query->bind_param("ss", $ip, $username2); 
+	$query->execute();
+	return true;
+}
+function GetUsers($isbanned2, $conn) {
 	global $users;
-    $users = $conn->query("SELECT * FROM clitorizweb_users");
+    $query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE isbanned = ?");
+	$query->bind_param("s", $isbanned2);
+	$query->execute();
+	$users = $query->get_result();
 	return $users;
 }
 function GetCustomBadges($conn) {
@@ -192,6 +231,14 @@ function GetThreadsFromForumName($forum, $conn) {
 	$threads = $query->get_result();
 	return $threads;
 }
+function GrabBan($username, $conn) {
+	global $bans;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_bans WHERE ban_username = ? ORDER BY id DESC");
+	$query->bind_param("s", $username);
+	$query->execute();
+	$bans = $query->get_result();
+	return $bans;
+}
 function GetThreadsFromForumName2($forum2, $conn) {
 	global $threads2;
     $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_pinned DESC");
@@ -199,6 +246,14 @@ function GetThreadsFromForumName2($forum2, $conn) {
 	$query->execute();
 	$threads2 = $query->get_result();
 	return $threads2;
+}
+function GetThreadsFromForumName3($forum3, $conn) {
+	global $threads3;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_threads WHERE thread_forum = ? ORDER BY thread_pinned DESC");
+	$query->bind_param("s", $forum3);
+	$query->execute();
+	$threads3 = $query->get_result();
+	return $threads3;
 }
 function GetReply($id, $conn) {
 	global $replies;
@@ -332,6 +387,34 @@ function GetThread($id, $conn) {
 	$thread = $query->get_result();
 	return $thread;
 }
+function GrabReports($reports, $conn) {
+	global $reports;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_reports ORDER BY id DESC");
+	$query->execute();
+	$reports = $query->get_result();
+	return $reports;
+}
+function GrabLogs($logs, $conn) {
+	global $logs;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_logs ORDER BY id DESC");
+	$query->execute();
+	$logs = $query->get_result();
+	return $logs;
+}
+function AddLog($log_note, $ip, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_logs (log_note, ip) VALUES (?,?)");
+	$query->bind_param("ss", $log_note, $ip); 
+	$query->execute();
+	return true;
+}
+function GetComment($id, $conn) {
+	global $comment;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_comments WHERE id = ?");
+	$query->bind_param("i", $id); 
+	$query->execute();
+	$comment = $query->get_result();
+	return $comment;
+}
 function GetThreadAuthor($author, $conn) {
 	global $thread_author;
 	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
@@ -339,6 +422,22 @@ function GetThreadAuthor($author, $conn) {
 	$query->execute();
 	$thread_author = $query->get_result();
 	return $thread_author;
+}
+function GetCommentFromName($name, $conn) {
+	global $comments;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_comments WHERE comment_profile = ? ORDER BY comment_date DESC");
+	$query->bind_param("s", $name); 
+	$query->execute();
+	$comments = $query->get_result();
+	return $comments;
+}
+function GetCommentAuthor($author, $conn) {
+	global $comment_author;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $author); 
+	$query->execute();
+	$comment_author = $query->get_result();
+	return $comment_author;
 }
 function GetPostAuthor($author2, $conn) {
 	global $replies_author;
@@ -351,6 +450,12 @@ function GetPostAuthor($author2, $conn) {
 function DeleteReply($id, $conn) {
 	$query = $conn->prepare("DELETE FROM clitorizweb_replies WHERE post_id = ?");
 	$query->bind_param("i", $id); 
+	$query->execute();
+	return true;
+}
+function DeleteComment($comment_id, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_comments WHERE id = ?");
+	$query->bind_param("i", $comment_id); 
 	$query->execute();
 	return true;
 }
@@ -381,5 +486,40 @@ function GetRepliesFromAuthor($author_name, $conn) {
 	$query->execute();
 	$post_counter2 = $query->get_result();
 	return $post_counter2;
+}
+function GrabGroups($groups, $conn) {
+	global $groups;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_groups ORDER BY id DESC");
+	$query->execute();
+	$groups = $query->get_result();
+	return $groups;
+}
+function CreateGroup($title, $desc, $picture, $owner, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_groups (group_name, group_owner, group_description, group_photo) VALUES (?,?,?,?)");
+	$query->bind_param("ssss", $title, $owner, $desc, $picture); 
+	$query->execute();
+	return true;
+}
+function JoinGroup($title, $owner, $conn) {
+	$query = $conn->prepare("INSERT INTO clitorizweb_group_users (group_user, group_title) VALUES (?,?)");
+	$query->bind_param("ss", $owner, $title); 
+	$query->execute();
+	return true;
+}
+function GetUsersFromGroup($group_name1, $conn) {
+	global $group_users;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_group_users WHERE group_title = ?");
+	$query->bind_param("s", $group_name1);
+	$query->execute();
+	$group_users = $query->get_result();
+	return $group_users;
+}
+function GetGroup($id, $conn) {
+	global $group;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_groups WHERE id = ?");
+	$query->bind_param("i", $id); 
+	$query->execute();
+	$group = $query->get_result();
+	return $group;
 }
 ?>

@@ -8,7 +8,9 @@ if (!isset($_GET["user"]) && !isset($_GET["friend"]) && !isset($_GET["unfriend"]
 if (isset($_GET["user"])) {
 	$name = htmlspecialchars($_GET["user"]);
 	$user = NULL;
+	$comments = NULL;
 	GetProfile($name, $conn);
+	GetCommentFromName($name, $conn);
 	if ($user->num_rows == 1) {
 		$friend = NULL;
 		$friend2 = NULL;
@@ -17,6 +19,28 @@ if (isset($_GET["user"])) {
 		$friend_name = $details['username'];
 	    GetFriends($friend_name, $friend_status, $conn);
 	    GetFriends2($friend_name, $friend_status, $conn);
+		
+	    if ($details["isbanned"] == "true") {
+			header("Location: currently_banned.php"); 
+		}
+	} else {
+		header("Location: /"); 
+	}
+}
+if (isset($_GET["delete_comment"])) {
+	$id = $_GET["delete_comment"];
+	$comment = NULL;
+    GetComment($id, $conn);
+	if ($comment->num_rows == 1) {
+		$comment_details = $comment->fetch_assoc();
+	    if ($comment_details["comment_username"] != $_SESSION["user"] AND $user["badge"] != "administrator")  {
+			exit("Can't delete someone's other comments.");
+		} else {
+			$comment_id = $comment_details["id"];
+			$comment_name = $comment_details["comment_profile"];
+			DeleteComment($comment_id, $conn);
+			header("Location: profile.php?user=" . $comment_name);
+		}
 	} else {
 		header("Location: /"); 
 	}
@@ -115,6 +139,29 @@ if (isset($_GET["accept_friend"])) {
 			$status2 = "friends";
 			AcceptFriend($buddy1, $buddy2, $status2, $conn);
 			header("Location: /profile.php?user=" . $buddy1); 
+		}
+	}
+}
+if (isset($_POST["post"])) {
+	if (empty($_POST["comment"])) {
+		exit("Fill out the comments field.");
+	} elseif (!isset($_SESSION["user"])) {
+	    exit("You are not logged in.");
+	} else {
+        $username = $_SESSION['user'];
+        $user = NULL;
+        $get = NULL;
+        GetCurrentUser($username, $conn);
+		$cooldown = $user["comment_cooldown"];
+        $user = htmlspecialchars($details['username']);
+	    $comment = htmlspecialchars($_POST["comment"]);
+		$time = date("Y-m-d H:i:s", time() + 30);
+		if ($cooldown > date("Y-m-d H:i:s")) {
+			exit("You have cooldown of 30 seconds");
+		} else {
+			AddCooldown2($username, $time, $conn);
+	        AddComment($username, $comment, $user, $conn);
+		    header("Location: profile.php?user=" . $user);
 		}
 	}
 }

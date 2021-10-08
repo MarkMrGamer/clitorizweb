@@ -5,7 +5,8 @@
 $counter = 0;
 
 $users = NULL;
-GetUsers($conn);
+$isbanned2 = "false";
+GetUsers($isbanned2, $conn);
 
 if (isset($_POST["get_user"])) {
 	$username = $_POST["username"];
@@ -33,24 +34,51 @@ if (isset($_POST["clear1"])) {
     $pfp = 0;
 	$username = $_GET["name"];
     UpdateProfilePicture($pfp, $username, $conn);
+	// add log 
+	$user_log = $_SESSION['user'];
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+	AddLog("<b>$user_log</b> cleared profile picture for $username", $ip, $conn);
+	$counter = 9;
 }
 
 if (isset($_POST["clear2"])) {
     $song = 0;
 	$username = $_GET["name"];
-    UpdateAudioProfile($song, $username, $conn);
+	$audioFileType = "mp3";
+    UpdateAudioProfile($song, $audioFileType, $username, $conn);
+	// add log 
+	$user_log = $_SESSION['user'];
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+	AddLog("<b>$user_log</b> cleared audio profile for $username", $ip, $conn);
+	$counter = 10;
 }
 
 if (isset($_POST["clear3"])) {
     $video = 0;
 	$username = $_GET["name"];
     UpdateVideoProfile($video, $username, $conn);
+	// add log 
+	$user_log = $_SESSION['user'];
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+	AddLog("<b>$user_log</b> cleared video profile for $username", $ip, $conn);
+	$counter = 11;
 }
 
 if (isset($_FILES["fileupload2"])) {
 	
 	//Trashed code..
-	if ($_FILES['fileupload2']['name'] == "") {
+	if (isset($_POST["clear2"])) {
+		$counter = 10;
+	} elseif ($_FILES['fileupload2']['name'] == "") {
 		$counter = 6;
 	} else {
 		$username = $_GET["name"];
@@ -64,13 +92,20 @@ if (isset($_FILES["fileupload2"])) {
 		$newfile2 = $directory2 . $song . "." . $audioFileType;
 		
 	    switch (true) {
-		    case $audioFileType != "mp3":
+		    case $audioFileType != "mp3" && $audioFileType != "wav" && $audioFileType != "ogg" && $audioFileType != "flac":
 		    $counter = 5;
 		    break;
 		    default:
 		    if (move_uploaded_file($_FILES["fileupload2"]["tmp_name"], $newfile)) {
-			    UpdateAudioProfile($song, $username, $conn);
-			    header("Location: user.php?name=" . $username);
+			    UpdateAudioProfile($song, $audioFileType, $username, $conn);
+                // add log 
+	            $user_log = $_SESSION['user'];
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	            if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	                $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                }
+	            AddLog("<b>$user_log</b> changed audio profile for $username", $ip, $conn);
+			    header("Location: settings.php");
 		    }
 	    }
     }
@@ -79,10 +114,10 @@ if (isset($_FILES["fileupload2"])) {
 if (isset($_FILES["fileupload3"])) {
 	
 	//Trashed code..
-	if ($_FILES['fileupload3']['name'] == "") {
+	if (isset($_POST["clear3"])) {
+		$counter = 11;
+	} elseif ($_FILES['fileupload3']['name'] == "") {
 		$counter = 7;
-	} elseif ($user["video_access"] == "false") {
-		exit("You don't have video access."); 
 	} else {
 		$username = $_GET["name"];
 		$video = rand(1,2147483647);
@@ -101,6 +136,13 @@ if (isset($_FILES["fileupload3"])) {
 		    default:
 		    if (move_uploaded_file($_FILES["fileupload3"]["tmp_name"], $newfile)) {
 			    UpdateVideoProfile($video, $username, $conn);
+                // add log 
+	            $user_log = $_SESSION['user'];
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	            if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	                $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                }
+	            AddLog("<b>$user_log</b> changed video profile for $username", $ip, $conn);
 			    header("Location: user.php?name=" . $username);
 		    }
 	    }
@@ -110,7 +152,9 @@ if (isset($_FILES["fileupload3"])) {
 if (isset($_FILES["fileupload"])) {
 	
 	//Trashed code..
-	if ($_FILES['fileupload']['name'] == "") {
+	if (isset($_POST["clear1"])) {
+		$counter = 9;
+	} elseif ($_FILES['fileupload']['name'] == "") {
 		$counter = 3;
 	} else {
 		$username = $_GET["name"];
@@ -123,8 +167,6 @@ if (isset($_FILES["fileupload"])) {
 	    $newfile = $directory . $pfp . "." . "gif";
 		$newfile2 = $directory2 . $pfp . "." . "gif";
         $imageCheck = getimagesize($_FILES["fileupload"]["tmp_name"]);
-		$image1 = imagecreatefromgif($_FILES["fileupload"]); 
-		imagegif($image1,$newfile);
 
 	    switch (true) {
 		    case $imageCheck == false:
@@ -136,6 +178,13 @@ if (isset($_FILES["fileupload"])) {
 		    default:
 		    if (move_uploaded_file($_FILES["fileupload"]["tmp_name"], $newfile)) {
 			    UpdateProfilePicture($pfp, $username, $conn);
+                // add log 
+	            $user_log = $_SESSION['user'];
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	            if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	                $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                }
+	            AddLog("<b>$user_log</b> changed profile picture for $username", $ip, $conn);
 			    header("Location: user.php?name=" . $username);
 		    }
 	    }

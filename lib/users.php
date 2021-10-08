@@ -4,5 +4,6 @@
 
 //get users from function
 $users = NULL;
-GetUsers($conn);
+$isbanned2 = "false";
+GetUsers($isbanned2, $conn);
 ?>

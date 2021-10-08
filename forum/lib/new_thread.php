@@ -9,6 +9,8 @@ if (isset($_GET["id"])) {
 		$forum = "discussion";
 	} elseif ($_GET["id"] == 2) {
 		$forum = "halflife";
+	} elseif ($_GET["id"] == 3) {
+		$forum = "technology";
 	} else {
 		header("Location: /forum/");
 	}

@@ -25,13 +25,28 @@ $song = rand(1, 3);
 $video = rand(1, 2);
 $profile_picture = rand(1, 27);
 $result = NULL;
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	$_SERVER['HTTP_X_FORWARDED_FOR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+}
 
 //first, we need to check if they exist
 CheckDB($username, $conn);
 
+//here is recaptcha for security i guess
+$response = $_POST["g-recaptcha-response"];
+$secretKey = "6Lcamg4cAAAAAMAVYn5La74K5QITRcrrqqFXdJ94";
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($response);
+$response = file_get_contents($url);
+$responseKeys = json_decode($response,true);
+	
 //if the person dosen't exist, let's
 //continue with our register machine
 	switch(true) {
+		case $responseKeys["success"] == false: 
+		$counter = 6;
+		break;
 		case preg_match("/[^a-z0-9 ]/i", $username):
 		$counter = 3;
 		break;
@@ -54,7 +69,7 @@ CheckDB($username, $conn);
 		$counter = 2;
 		break;
 		default:
-		InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $conn);
+		InsertUser($username, $password_hashed, $email, $profile_picture, $song, $video, $ip, $conn);
 		$counter = 4;
     }
 }

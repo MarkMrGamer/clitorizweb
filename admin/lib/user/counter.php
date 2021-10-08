@@ -15,7 +15,7 @@ switch($counter) {
 	   echo "Not an audio.";
 	   break;
 	case 5:
-	   echo "Audio files (MP3) are only allowed.";
+	   echo "Audio files (MP3, WAV, OGG, FLAC) are only allowed.";
 	   break;
 	case 6:
 	   echo "Please upload an audio.";
@@ -25,6 +25,15 @@ switch($counter) {
 	   break;
 	case 8:
 	   echo "Video files (MP4) are only allowed.";
+	   break;
+	case 9:
+	   echo "Successfully cleared profile picture!";
+	   break;
+	case 10:
+	   echo "Successfully cleared audio profile!";
+	   break;
+	case 11:
+	   echo "Successfully cleared video profile!";
 	   break;
 }
 ?>

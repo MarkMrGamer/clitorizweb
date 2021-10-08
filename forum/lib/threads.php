@@ -13,6 +13,11 @@ if (isset($_GET["id"])) {
 		
 		$threads = NULL;
         GetThreadsFromForumName($forum, $conn);
+	} elseif ($_GET["id"] == 3) {
+		$forum = "technology";
+		
+		$threads = NULL;
+        GetThreadsFromForumName($forum, $conn);
 	} else {
 		header("Location: /forum/");
 	}

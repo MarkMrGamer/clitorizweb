@@ -6,6 +6,7 @@
     vertical-align: top;
     padding-left: 5px;
     word-break: break-word;
+	white-space: pre-wrap;
 }
 
 .organize {
@@ -210,6 +211,34 @@ body {
   width: 440px;
   padding-top: 6px;
   padding-bottom: 6px;
+}
+
+.friendicon {
+    background: url(/images/icons/friend_user.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+}
+
+.blockicon {
+    background: url(/images/icons/block_user.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+}
+
+.reporticon {
+    background: url(/images/icons/report_user.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+}
+
+.messageicon {
+    background: url(/images/icons/send_message.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
 }
 
 .about { grid-area: about; }

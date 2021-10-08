@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.4.11-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
+-- Server version:               10.3.29-MariaDB-0+deb10u1 - Debian 10
+-- Server OS:                    debian-linux-gnu
 -- HeidiSQL Version:             11.0.0.5919
 -- --------------------------------------------------------
 
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_badges` (
   `badge_name` varchar(100) DEFAULT NULL,
   `badge_pic` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -35,6 +35,29 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_banner` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table clitorizweb.clitorizweb_bans
+CREATE TABLE IF NOT EXISTS `clitorizweb_bans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ban_date` date DEFAULT NULL,
+  `ban_note` varchar(100) DEFAULT NULL,
+  `ban_username` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table clitorizweb.clitorizweb_comments
+CREATE TABLE IF NOT EXISTS `clitorizweb_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment_username` varchar(255) DEFAULT NULL,
+  `comment_description` varchar(100) DEFAULT NULL,
+  `comment_date` varchar(100) DEFAULT current_timestamp(),
+  `comment_profile` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table clitorizweb.clitorizweb_friends
 CREATE TABLE IF NOT EXISTS `clitorizweb_friends` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -42,7 +65,40 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_friends` (
   `buddy2` varchar(500) DEFAULT NULL,
   `status` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table clitorizweb.clitorizweb_groups
+CREATE TABLE IF NOT EXISTS `clitorizweb_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(100) DEFAULT NULL,
+  `group_owner` varchar(100) DEFAULT NULL,
+  `group_description` varchar(100) DEFAULT NULL,
+  `group_photo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table clitorizweb.clitorizweb_group_users
+CREATE TABLE IF NOT EXISTS `clitorizweb_group_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_user` varchar(100) DEFAULT NULL,
+  `group_title` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table clitorizweb.clitorizweb_logs
+CREATE TABLE IF NOT EXISTS `clitorizweb_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `log_note` varchar(500) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ip` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -54,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_replies` (
   `post_thread` int(11) DEFAULT NULL,
   `post_date` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4660 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4746 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -66,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_reports` (
   `report_description` varchar(100) NOT NULL DEFAULT '0',
   `user_reporter` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -81,18 +137,18 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_threads` (
   `thread_pinned` varchar(50) DEFAULT 'no',
   `thread_locked` varchar(50) DEFAULT 'no',
   PRIMARY KEY (`thread_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=294 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table clitorizweb.clitorizweb_users
 CREATE TABLE IF NOT EXISTS `clitorizweb_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(25) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `badge` varchar(100) NOT NULL DEFAULT 'user',
-  `pfp` text NOT NULL DEFAULT '',
+  `pfp` bigint(20) NOT NULL DEFAULT 0,
   `status` varchar(255) DEFAULT NULL,
   `song` bigint(20) DEFAULT NULL,
   `video` bigint(20) DEFAULT NULL,
@@ -100,12 +156,17 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_users` (
   `css` text DEFAULT NULL,
   `joined` date DEFAULT current_timestamp(),
   `forum_cooldown` timestamp NULL DEFAULT current_timestamp(),
+  `comment_cooldown` timestamp NULL DEFAULT current_timestamp(),
   `video_access` varchar(50) DEFAULT 'false',
   `custom_rank` varchar(100) DEFAULT NULL,
   `custom_stars` int(11) DEFAULT NULL,
   `custom_badge` varchar(100) DEFAULT NULL,
+  `audio_file_type` varchar(50) DEFAULT 'mp3',
+  `ip` text DEFAULT NULL,
+  `isbanned` varchar(50) DEFAULT 'false',
+  `forum_moderator` varchar(50) DEFAULT 'false',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 

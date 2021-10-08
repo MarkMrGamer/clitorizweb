@@ -35,7 +35,7 @@ if (isset($_GET["delete_reply"])) {
     GetReply($id, $conn);
 	if ($replies->num_rows == 1) {
 		$replies_details = $replies->fetch_assoc();
-	    if ($replies_details["post_author"] != $_SESSION["user"] AND $user["badge"] != "administrator")  {
+	    if ($replies_details["post_author"] != $_SESSION["user"] AND $user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("Can't delete someone's other replies.");
 		} else {
 			$post_id = $replies_details["post_id"];
@@ -54,7 +54,7 @@ if (isset($_GET["delete_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($thread_details["thread_author"] != $_SESSION["user"] AND $user["badge"] != "administrator")  {
+	    if ($thread_details["thread_author"] != $_SESSION["user"] AND $user["badge"] != "administrator" AND $user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("Can't delete someone's other threads.");
 		} else {
 			$thread_id = $thread_details["thread_id"];
@@ -64,6 +64,9 @@ if (isset($_GET["delete_thread"])) {
 			}
 			if ($thread_forum == "halflife") {
 				$forum_id = 2;
+			}
+			if ($thread_forum == "technology") {
+				$forum_id = 3;
 			}
 			DeleteThread($thread_id, $conn);
 			DeleteRepliesFromThread($thread_id, $conn);
@@ -80,7 +83,7 @@ if (isset($_GET["pin_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator")  {
+	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
 			exit("You are not allowed to pin threads.");
 		} elseif ($thread_details["thread_pinned"] != "no") {
 			exit("Thread is already pinned.");
@@ -93,6 +96,9 @@ if (isset($_GET["pin_thread"])) {
 			}
 			if ($thread_forum == "halflife") {
 				$forum_id = 2;
+			}
+			if ($thread_forum == "technology") {
+				$forum_id = 3;
 			}
 			PinThread($thread_id, $thread_pin, $conn);
 			header("Location: forum.php?id=" . $forum_id);
@@ -108,7 +114,7 @@ if (isset($_GET["unpin_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator")  {
+	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
 			exit("You are not allowed to unpin threads.");
 	    } elseif ($thread_details["thread_pinned"] != "yes") {
 			exit("Thread is already unpinned.");
@@ -121,6 +127,9 @@ if (isset($_GET["unpin_thread"])) {
 			}
 			if ($thread_forum == "halflife") {
 				$forum_id = 2;
+			}
+			if ($thread_forum == "technology") {
+				$forum_id = 3;
 			}
 			UnPinThread($thread_id, $thread_pin, $conn);
 			header("Location: forum.php?id=" . $forum_id);
@@ -136,7 +145,7 @@ if (isset($_GET["lock_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator")  {
+	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
 			exit("You are not allowed to lock threads.");
 		} elseif ($thread_details["thread_locked"] != "no") {
 			exit("Thread is already locked.");
@@ -149,6 +158,9 @@ if (isset($_GET["lock_thread"])) {
 			}
 			if ($thread_forum == "halflife") {
 				$forum_id = 2;
+			}
+			if ($thread_forum == "technology") {
+				$forum_id = 3;
 			}
 			LockThread($thread_id, $thread_lock, $conn);
 			header("Location: forum.php?id=" . $forum_id);
@@ -164,7 +176,7 @@ if (isset($_GET["unlock_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator")  {
+	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
 			exit("You are not allowed to unlock threads.");
 	    } elseif ($thread_details["thread_locked"] != "yes") {
 			exit("Thread is already unlocked.");
@@ -177,6 +189,9 @@ if (isset($_GET["unlock_thread"])) {
 			}
 			if ($thread_forum == "halflife") {
 				$forum_id = 2;
+			}
+			if ($thread_forum == "technology") {
+				$forum_id = 3;
 			}
 			UnlockThread($thread_id, $thread_lock, $conn);
 			header("Location: forum.php?id=" . $forum_id);

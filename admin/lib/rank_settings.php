@@ -39,6 +39,15 @@ if (isset($_POST["update"])) {
         exit("Numbers are only allowed in the custom stars input.");
     }
 	UpdateRank($username, $badge, $custom_rank, $custom_stars_converter, $custom_badge, $conn);
+	
+	// add log 
+	$user_log = $_SESSION['user'];
+	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+	    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+	AddLog("<b>$user_log</b> changed rank for $username", $ip, $conn);
+	
 	header("Location: rank_settings.php?name=" . $username);
 }
 ?>

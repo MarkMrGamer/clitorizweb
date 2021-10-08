@@ -40,7 +40,10 @@ CheckLogin($username, $conn);
 		$counter = 1;
 		break;
 		default:
-        $_SESSION['user'] = $result['username'];
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                $_SESSION['user'] = $result['username'];
+		$username2 = $result['username'];
+		UpdateIPLogin($username2, $ip, $conn);
 		header('Location: /home.php');
     }
 }

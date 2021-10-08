@@ -33,16 +33,16 @@ if (isset($_SESSION["user"])) {
 }
 switch($friends) {
 	case "friend":
-	   echo "<img src=\"/images/icons/friend_user.png\"> <a href=\"profile.php?friend=" . $details["username"] . "\">Friend</a>";
+	   echo "<div class=\"friendicon\"></div> <a href=\"profile.php?friend=" . $details["username"] . "\">Friend</a>";
 	   break;
 	case "pending":
-	   echo "<img src=\"/images/icons/friend_user.png\"> <a href=\"#\">Pending</a>";
+	   echo "<div class=\"friendicon\"></div> <a href=\"#\">Pending</a>";
 	   break;
 	case "accept":
-	   echo "<img src=\"/images/icons/friend_user.png\"> <a href=\"profile.php?accept_friend=" . $details["username"] . "\">Accept</a>";
+	   echo "<div class=\"friendicon\"></div> <a href=\"profile.php?accept_friend=" . $details["username"] . "\">Accept</a>";
 	   break;
 	case "unfriend":
-	   echo "<img src=\"/images/icons/block_user.png\"> <a href=\"profile.php?unfriend=" . $details["username"] . "\">Unfriend</a>";
+	   echo "<div class=\"blockicon\"></div> <a href=\"profile.php?unfriend=" . $details["username"] . "\">Unfriend</a>";
 	   break;
 }
 ?>

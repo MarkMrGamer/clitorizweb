@@ -17,5 +17,8 @@ switch($counter) {
 	case 5:
 	   echo "Username already taken.";
 	   break;
+	case 6:
+	   echo "Captcha failed.";
+	   break;
 }
 ?>
