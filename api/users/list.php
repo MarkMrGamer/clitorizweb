@@ -16,7 +16,7 @@ while($row = $users->fetch_assoc()) {
  } else { 
    $cbadge = $row['custom_badge'];
  }
- $userarr = array('Username' => $row['username'], 'Badge' => $cbadge, 'Status' => $row['status'], 'Picture' => require("lib/pfp.php"));
+ $userarr = array('Username' => $row['username'], 'Badge' => $cbadge, 'Status' => $row['status'], 'Picture' => require("../lib/pfp.php"));
  $jsonarr[$count] = array('Count' => $count + 1, 'Data' => $userarr);
  $count = $count + 1;
 }
