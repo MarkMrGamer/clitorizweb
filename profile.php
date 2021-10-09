@@ -74,7 +74,7 @@
                               <tbody>
                                  <tr>
                                     <td>
-                                       <audio controls <?php if (isset($username)) { if $user["audio_autoplay"] == "true" { echo "autoplay"; } } ?> style="width:190px;height:30px;">
+                                       <audio controls <?php if (isset($username)) { if ($user["audio_autoplay"] == "true") { echo "autoplay"; } } ?> style="width:190px;height:30px;">
                                           <source src="<?php require("lib/song.php"); ?>" type="audio/mpeg">
                                           <font size="-2">Audio element not supported on this browser</font>
                                        </audio>

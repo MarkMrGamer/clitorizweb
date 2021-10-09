@@ -8,7 +8,18 @@ $user = NULL;
 $get = NULL;
 GetCurrentUser($username, $conn);
 
-if (isset($_POST["update"])) {
+    if (isset($_POST["update"])) {
+	
+	    if (isset($_POST["autoplay_toggle"])) {
+        $autoplay = "true";
+        ToggleAutoPlay($autoplay, $username, $conn);
+    }
+
+    if (!isset($_POST["autoplay_toggle"])) {
+        $autoplay = "false";
+        ToggleAutoPlay($autoplay, $username, $conn);
+    }
+
 	$status = htmlspecialchars($_POST["status"]);
 	$css = $_POST["css"];
 	//space my code...
@@ -28,16 +39,6 @@ if (isset($_POST["clear2"])) {
     $song = 0;
 	$audioFileType = "mp3";
     UpdateAudioProfile($song, $audioFileType, $username, $conn);
-}
-
-if (isset($_POST["autoplay_toggle"])) {
-    $autoplay = $_POST["autoplay_toggle"];
-    ToggleAutoPlay($autoplay, $username, $conn);
-}
-
-if (!isset($_POST["autoplay_toggle"])) {
-    $autoplay = "false";
-    ToggleAutoPlay($autoplay, $username, $conn);
 }
 
 if (isset($_POST["clear3"])) {
