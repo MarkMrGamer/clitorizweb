@@ -13,6 +13,6 @@ if (empty($_GET["user"])) {
   die();
 }
 
-echo json_encode(array('Username' => $details["username"], 'Bio' => $details["bio"],  'Badge' => $details["badge"],'CustomStars' => $details['custom_stars'], 'CustomRank' => $details['custom_rank'], 'CustomBadge' => $details["custom_badge"], 'Status' => $details["status"], 'CSS' => $details['css'].'.gif', 'Picture' => $details['pfp'].'.gif'));
+echo json_encode(array('Username' => $details["username"], 'Bio' => $details["bio"],  'Badge' => $details["badge"],'CustomStars' => $details['custom_stars'], 'CustomRank' => $details['custom_rank'], 'CustomBadge' => $details["custom_badge"], 'Status' => $details["status"], 'CSS' => $details['css'], 'Picture' => $details['pfp'].'.gif'));
 
 ?>
