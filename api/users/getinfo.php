@@ -1,5 +1,4 @@
 <?php 
-require("../../lib/require/session.php"); 
 require("../../lib/config/database.php"); 
 require("../../lib/config/functions.php"); 
 require("../../lib/profile.php"); 
