@@ -8,9 +8,9 @@ $user = NULL;
 $get = NULL;
 GetCurrentUser($username, $conn);
 
-    if (isset($_POST["update"])) {
+if (isset($_POST["update"])) {
 	
-	    if (isset($_POST["autoplay_toggle"])) {
+	if (isset($_POST["autoplay_toggle"])) {
         $autoplay = "true";
         ToggleAutoPlay($autoplay, $username, $conn);
     }
