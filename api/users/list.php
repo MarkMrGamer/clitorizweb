@@ -17,13 +17,11 @@ while($row = $users->fetch_assoc()) {
  } else { 
    $cbadge = $row['custom_badge'];
  }
- $userarr = array('Username' => $row['username'], 'Badge' => $cbadge, 'Status' => $row['status'], 'Picture' => $pfp);
- $jsonarr[$count] = array('Count' => $count + 1, 'Data' => $userarr);
+ $jsonarr[$count] = array('Username' => $row['username'], 'Badge' => $cbadge, 'Status' => $row['status'], 'Picture' => $pfp);
  $count = $count + 1;
 }
 
 
-echo json_encode($jsonarr);
+echo json_encode(array('Count' => $count + 1, 'Data' => $jsonarr));
 
-?>
 
