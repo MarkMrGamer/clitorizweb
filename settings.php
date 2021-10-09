@@ -24,6 +24,7 @@
                         <label>change password:</label> <input class="UpdateText" type="password" name="change_password"><br><br>
                         <label style="vertical-align: top;">css:</label> <textarea name="css" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["css"]; ?></textarea><br><br>
                         <label style="vertical-align: top;">bio:</label> <textarea name="bio" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["bio"]; ?></textarea><br><br>
+						<label style="vertical-align: top;">audio autoplay:</label> <input type="checkbox" id="autoplay_toggle" name="autoplay_toggle" <?php if ($user["audio_autoplay"] == "true") { echo "checked=\"checked\""; } ?> value="true"><br><br>
                         <label>profile picture:</label> <input type="file" name="fileupload" id="fileupload" /><input class="updateSubmit" type="submit" name="clear1" value="clear"><br><br>
                         <label>audio profile:</label> <input type="file" name="fileupload2" id="fileupload2" /><input class="updateSubmit" type="submit" name="clear2" value="clear"><br>
                         <?php if ($user["video_access"] == "true") { ?><br><label>video profile:</label> <input type="file" name="fileupload3" id="fileupload3" /><input class="updateSubmit" type="submit" name="clear3" value="clear"><br><?php } ?>

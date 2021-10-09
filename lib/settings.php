@@ -30,6 +30,16 @@ if (isset($_POST["clear2"])) {
     UpdateAudioProfile($song, $audioFileType, $username, $conn);
 }
 
+if (isset($_POST["autoplay_toggle"])) {
+    $autoplay = $_POST["autoplay_toggle"];
+    ToggleAutoPlay($autoplay, $username, $conn);
+}
+
+if (!isset($_POST["autoplay_toggle"])) {
+    $autoplay = "false";
+    ToggleAutoPlay($autoplay, $username, $conn);
+}
+
 if (isset($_POST["clear3"])) {
     $video = 0;
     UpdateVideoProfile($video, $username, $conn);

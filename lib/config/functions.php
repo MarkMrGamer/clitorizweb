@@ -522,4 +522,10 @@ function GetGroup($id, $conn) {
 	$group = $query->get_result();
 	return $group;
 }
+function ToggleAutoPlay($autoplay, $username, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET audio_autoplay = ? WHERE username = ?");
+	$query->bind_param("ss", $autoplay, $username); 
+	$query->execute();
+	return true;
+}
 ?>
