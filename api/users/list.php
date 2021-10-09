@@ -12,12 +12,7 @@ header("Content-Type: application/json");
 while($row = $users->fetch_assoc()) { 
  $cbadge = "";
  $pfp = $row['pfp'] . ".gif";
- if (!empty($row['badge'])) {
-   $cbadge = $row['badge'];
- } else { 
-   $cbadge = $row['custom_badge'];
- }
- $jsonarr[$count] = array('Username' => $row['username'], 'Badge' => $cbadge, 'Status' => $row['status'], 'Picture' => $pfp);
+ $jsonarr[$count] = array('Username' => $row['username'], 'Badge' =>  $row['badge'], 'CustomBadge' =>  $row['custom_badge'], 'Status' => $row['status'], 'Picture' => $pfp);
  $count = $count + 1;
 }
 
