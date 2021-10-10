@@ -13,6 +13,6 @@ if (empty($_GET["user"])) {
   die();
 }
 
-echo json_encode(array('Username' => $details["username"], 'Bio' => $details["bio"],  'Badge' => $details["badge"],'CustomStars' => $details['custom_stars'], 'CustomRank' => $details['custom_rank'], 'CustomBadge' => $details["custom_badge"], 'Status' => $details["status"],  'Audio' => $details["song"].".".$details["audio_file_type"],  'AudioAutoplay' => $user["audio_autoplay"],  'HasVideoPerms' => $details['video_access'], 'Video' => $details["video"].".mp4", 'CSS' => $details['css'], 'Picture' => $details['pfp'].'.gif'));
+echo json_encode(array('username' => $details["username"], 'bio' => $details["bio"],  'badge' => $details["badge"],'customstars' => $details['custom_stars'], 'customrank' => $details['custom_rank'], 'custombadge' => $details["custom_badge"], 'status' => $details["status"],  'audio' => $details["song"].".".$details["audio_file_type"],  'audioautoplay' => $user["audio_autoplay"],  'hasvideoaccess' => $details['video_access'], 'video' => $details["video"].".mp4", 'css' => $details['css'], 'picture' => $details['pfp'].'.gif'));
 
 ?>
