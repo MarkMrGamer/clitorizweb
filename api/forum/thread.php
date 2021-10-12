@@ -17,7 +17,7 @@ while($replies_details = $replies->fetch_assoc()) {
  $replies_author = NULL;
  GetPostAuthor($author2, $conn);
  $author_details2 = $replies_author->fetch_assoc();
- $jsonarr[$count] = array('id' => $row['thread_id'], 'locked' => $row['thread_locked'], 'pinned' => $row['thread_pinned'], 'author' => $row['thread_author'], 'title' => $row['thread_title'], 'replyCount' => $replies->num_rows);
+ $jsonarr[$count] = array('text' => $replies_details["post_text"], 'date' => strtotime($replies_details["post_date"]),  'author' => $author_details2["username"],  'authorPostcount' => $post_counter3,  'authorStars' => $author_details2["custom_stars"],  'authorRank' => $author_details2["custom_rank"],  'authorPicture' => $author_details2["pfp"], 'authorCustombadge' => $author_details2["custom_badge"],'authorBadge' => $author_details2["badge"]);
  $count = $count + 1;
 }
 
