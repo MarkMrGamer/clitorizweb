@@ -10,7 +10,13 @@ $count = 0;
 header("Content-Type: application/json");
 
 while($row = $users->fetch_assoc()) { 
- $jsonarr[$count] = array('username' => $row['username'], 'badge' =>  $row['badge'], 'customBadge' =>  $row['custom_badge'],'status' => $row['status'], 'picture' => $row['pfp'] . ".gif");
+
+ $custom_badge = $row["custom_badge"];
+ $get_custom_badge = NULL;
+ GetCustomBadge($custom_badge, $conn);
+ $badge_detail = $get_custom_badge->fetch_assoc();
+ 
+ $jsonarr[$count] = array('username' => $row['username'], 'badge' =>  $row['badge'], 'customBadge' =>  $badge_detail["badge_pic"].".gif",'status' => $row['status'], 'picture' => $row['pfp'] . ".gif");
  $count = $count + 1;
 }
 
