@@ -2,7 +2,6 @@
 <?php 
 require("../../lib/config/database.php"); 
 require("../../lib/config/functions.php"); 
-require("../../lib/profile.php"); 
 require("../../forum/lib/threads.php");
 
 header("Content-Type: application/json");
