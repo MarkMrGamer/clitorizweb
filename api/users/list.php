@@ -10,7 +10,7 @@ $count = 0;
 header("Content-Type: application/json");
 
 while($row = $users->fetch_assoc()) { 
- $jsonarr[$count] = array('username' => $row['username'], 'badge' =>  $row['badge'], 'customBadge' =>  $row['custom_badge'].".gif", 'status' => $row['status'], 'picture' => $row['pfp'] . ".gif");
+ $jsonarr[$count] = array('username' => $row['username'], 'badge' =>  $row['badge'], 'customBadge' =>  $row['custom_badge'],'status' => $row['status'], 'picture' => $row['pfp'] . ".gif");
  $count = $count + 1;
 }
 
