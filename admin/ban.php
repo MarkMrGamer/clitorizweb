@@ -18,7 +18,7 @@
                      <br>
                      <br>
                      <form action="ban.php" method="POST" enctype="multipart/form-data">
-                        <label>username:</label> <input class="UpdateText" type="text" name="username">
+                        <label>username:</label> <input class="UpdateText" type="text" name="username" value="<?php require("../admin/lib/getname.php"); ?>">
                         <br><br><label>ban date:</label>
                         <input type="date" id="date" name="date"><br><br>
                         <label style="vertical-align: top;">moderation note:</label> <textarea name="note" class="UpdateText" style="width:300px;height:100px;"></textarea><br><br>

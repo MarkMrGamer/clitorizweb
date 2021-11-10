@@ -22,10 +22,7 @@
                      <br>
                      <br>
                      <?php } else { ?>
-                     <font size="2">Choose a user:</font>
-                     <form action="user.php" method="POST">
-                        <label>username:</label> <input type="text" name="username"> <input class="updateSubmit" type="submit" name="get_user" value="Get User">
-                     </form>
+                     <font size="2">Choose a user</font>
                      <?php 
                         }
                         ?>
@@ -55,7 +52,8 @@
          <?php } ?>
          <?php 
             if (!isset($_GET["name"])) {
-                while($row = $users->fetch_assoc()) { 
+                while($row = $users->fetch_assoc()) 
+			{ 
             ?>
          <table class="hmcontainer" width="440">
             <tbody>
@@ -66,7 +64,8 @@
                            <tr>
                               <td><img src="<?php require("../lib/pfp.php"); ?>" height="32" width="32" border="1"><br></td>
                               <td><font size="+1" class="UserProfile"><a href="../profile.php?user=<?php echo $row['username']; ?>"><?php echo $row['username']; ?></a></font> <?php if (!empty($row['badge'])) { ?><img src="<?php  $custom_badge = $row['custom_badge']; $badge = $row['badge']; require("../lib/badge.php"); ?>"><?php } ?><br>
-                                 <?php if (!empty($row['status'])) { ?><font class="UserProfile" size="-2"><?php echo $row['status']; ?></font><?php } ?> <font class="UserProfile" size="-2"><?php require("../lib/friend3.php"); ?></font>
+							  <a href="../admin/user.php?name=<?php echo $row['username']; ?>"><button class="updateSubmit">Choose</button></a>
+							  <a href="../admin/ban.php?name=<?php echo $row['username']; ?>"><button class="updateSubmit">Ban</button></a>
                               </td>
                            </tr>
                         </tbody>

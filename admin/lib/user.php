@@ -2,6 +2,8 @@
 // This php script
 // makes administrator able to play with users
 
+// Edited by doom
+
 $counter = 0;
 
 $users = NULL;

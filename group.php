@@ -42,15 +42,28 @@
                               <tbody>
                                  <tr></tr>
                                  <tr>
+								<?php 
+								    $counter1 = 0;
+									while($user_rows = $group_users->fetch_assoc()) {
+										$theuser = $user_rows["group_user"];
+										$get_details3 = NULL;
+										GetUserDetails($theuser, $conn);
+										$get_detail2 = $get_details3->fetch_assoc();
+								?>
                                     <td>
-                                       <font class="UserProfile" size="-2"><img src="/images/pfps/1.gif" width="16" height="15" border="1"> <a href="profile.php?user=test" style="vertical-align: top;">test</a></font>
+                                       <font class="UserProfile" size="-2"><img src="/images/pfps/<?php echo $get_detail2["pfp"]; ?>.gif" width="16" height="15" border="1"> <a href="profile.php?user=<?php echo $get_detail2["username"]; ?>" style="vertical-align: top;"><?php echo $get_detail2["username"]; ?></a>
+									   <?php if (isset($_SESSION["user"])) { if ($username == $groups2["group_owner"]) { ?>(<a href="group.php?id=<?php echo $groups2["id"]; ?>&kick=<?php echo $get_detail2["username"]; ?>">Kick</a>)</font><?php } } ?></font>
                                     </td>
-                                    <td>
-                                       <font class="UserProfile" size="-2"><img src="/images/pfps/1.gif" width="16" height="15" border="1"> <a href="profile.php?user=test" style="vertical-align: top;">test</a></font>
-                                    </td>
-                                    <td>
-                                       <font class="UserProfile" size="-2"><img src="/images/pfps/1.gif" width="16" height="15" border="1"> <a href="profile.php?user=test" style="vertical-align: top;">test</a></font>
-                                    </td>
+                                <?php
+								    $counter1++;
+									if ($counter1 == 3) {
+										echo "</tr>";
+										$counter = 0;
+									}
+									  
+									}
+									
+								?>
                                  </tr>
                               </tbody>
                            </table>
@@ -91,8 +104,45 @@
                      </tr>
                      <tr class="hmcontainer" height="55">
                         <td class="hmcontainer2" align="center">
-                           <form method="POST" action="group.php?id=1">
-                              <input type="submit" class="updateSubmit" value="Join" style="width:180px;margin-top:10px;margin-bottom:10px;" name="join">
+                           <form method="POST" action="group.php?id=<?php echo $groups2["id"]; ?>">
+							  <input type="text" name="group_title" value="<?php echo $groups2["group_name"]; ?>" style="display:none;">
+							  <input type="text" name="group_owner" value="<?php echo $groups2["group_owner"]; ?>" style="display:none;">
+							  <input type="text" name="group_id" value="<?php echo $groups2["id"]; ?>" style="display:none;">
+							  <?php if (isset($_SESSION["user"])) { 
+							    if ($_SESSION["user"] != $groups2["group_owner"]) {
+									$title = $groups2["group_name"];
+									$group_id = $groups2["id"];
+									
+									$usergroup = NULL;
+									CheckUserInGroup($title, $username, $conn);
+									
+									$user = $usergroup->fetch_assoc();
+									if ($user["group_user"] == NULL) {
+							  ?>
+									<input type="submit" class="updateSubmit" value="Join" style="width:180px;margin-top:10px;margin-bottom:10px;" name="join">
+							    <?php
+										}
+									}
+							    }
+							    ?>
+								
+							  <?php if (isset($_SESSION["user"])) { 
+							    if ($_SESSION["user"] != $groups2["group_owner"]) {
+									$title = $groups2["group_name"];
+									$group_id = $groups2["id"];
+									
+									$usergroup = NULL;
+									CheckUserInGroup($title, $username, $conn);
+									
+									$user = $usergroup->fetch_assoc();
+									if ($user["group_user"] != NULL) {
+							  ?>
+									<input type="submit" class="updateSubmit" value="Leave" style="width:180px;margin-top:10px;margin-bottom:10px;" name="leave">
+							    <?php
+										}
+									}
+							    }
+							    ?>
                               <input type="submit" class="updateSubmit" value="Report" style="width:180px;" name="report">
                            </form>
                         </td>

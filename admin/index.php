@@ -16,7 +16,7 @@
                   <td class="hmcontainer2"><font size="+1"><b>webserver status</b></font><br><br>
                      <b>Allocated space for PHP:</b> <b><?php echo convert(memory_get_usage(true)); ?></b><br>
                      <b>PHP version:<b> <?php echo phpversion() ?><br>
-                     <b>CPU usage:</b>  <?php echo $cpu['sys'] . "%"; ?>
+                     <b>CPU usage:</b> <?php echo $cpu['sys'] . "%"; ?>
                   </td>
                </tr>
             </tbody>
