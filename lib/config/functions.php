@@ -528,4 +528,26 @@ function ToggleAutoPlay($autoplay, $username, $conn) {
 	$query->execute();
 	return true;
 }
+function CheckUserInGroup($title, $username, $conn) {
+	global $usergroup;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
+	$query->bind_param("ss", $username, $title);
+	$query->execute();
+	$usergroup = $query->get_result();
+	return $usergroup;
+}
+function LeaveGroup($title, $username, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
+	$query->bind_param("ss", $username, $title); 
+	$query->execute();
+	return true;
+}
+function GetUserDetails($theuser, $conn) {
+	global $get_details3;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $theuser);
+	$query->execute();
+	$get_details3 = $query->get_result();
+	return $get_details3;
+}
 ?>
