@@ -10,6 +10,8 @@ $count = 0;
 $jsonarr = array();
 $frarr = array();
 $frarr2 = array();
+$ccount = 0;
+$cccount = 0;
 
 header("Content-Type: application/json");
 
@@ -41,7 +43,7 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
 {
     if ($friend->num_rows > 0)
     {
-        $ccount = 0;
+
         while ($friend_details = $friend->fetch_assoc())
         {
             $friend_details1 = $friend_details['buddy2'];
@@ -49,12 +51,11 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
             $get_friend = NULL;
             GetUserFriend($friend_details1, $conn);
             $frarr[$ccount] = array('name' => $friend_details2["username"], 'pfp' => $friend_details2["pfp"]);
-            $ccount++;
+            $ccount = $ccount + 1;
         }
     }
     if ($friend2->num_rows > 0)
     {
-        $cccount = 0;
         while ($friend_details_2 = $friend2->fetch_assoc())
         {
             $friend_details3 = $friend_details_2['buddy1'];
@@ -62,7 +63,7 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
             $get_friend2 = NULL;
             GetUserFriend2($friend_details1, $conn);
             $frarr2[$cccount] = array('name' => $friend_details4["username"], 'pfp' => $friend_details4["pfp"]);
-            $cccount++;
+              $cccount = $cccount + 1;
         }
     }
 }
