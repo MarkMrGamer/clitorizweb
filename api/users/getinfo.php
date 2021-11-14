@@ -41,28 +41,28 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
 {
     if ($friend->num_rows > 0)
     {
-        $count = 0;
+        $ccount = 0;
         while ($friend_details = $friend->fetch_assoc())
         {
             $friend_details1 = $friend_details['buddy2'];
             $friend_details2 = NULL;
             $get_friend = NULL;
             GetUserFriend($friend_details1, $conn);
-            $frarr[$count] = array('name' => $friend_details2["username"], 'pfp' => $friend_details2["pfp"]);
-            $count++;
+            $frarr[$ccount] = array('name' => $friend_details2["username"], 'pfp' => $friend_details2["pfp"]);
+            $ccount++;
         }
     }
     if ($friend2->num_rows > 0)
     {
-        $count = 0;
+        $cccount = 0;
         while ($friend_details_2 = $friend2->fetch_assoc())
         {
             $friend_details3 = $friend_details_2['buddy1'];
             $friend_details4 = NULL;
             $get_friend2 = NULL;
             GetUserFriend2($friend_details1, $conn);
-            $frarr2[$count] = array('name' => $friend_details4["username"], 'pfp' => $friend_details4["pfp"]);
-            $count++;
+            $frarr2[$cccount] = array('name' => $friend_details4["username"], 'pfp' => $friend_details4["pfp"]);
+            $cccount++;
         }
     }
 }
