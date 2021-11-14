@@ -19,38 +19,6 @@ if (empty($_GET["user"]))
     die();
 }
 
-function GetBadge(string $custom_badge, string $badge)
-{
-    $return = "";
-case $custom_badge != NULL:
-    $get_custom_badge = NULL;
-    GetCustomBadge($custom_badge, $conn);
-    $badge_detail = $get_custom_badge->fetch_assoc();
-    $return = "/images/custom_badges/" . $badge_detail["badge_pic"] . ".gif";
-    break;
-case $badge == "user" and $custom_badge == NULL:
-    $return = "/images/badges/user.png";
-    break;
-case $badge == "verified" and $custom_badge == NULL:
-    $return = "/images/badges/verified.png";
-    break;
-case $badge == "moderator" and $custom_badge == NULL:
-    $return = "/images/badges/moderator.png";
-    break;
-case $badge == "administrator" and $custom_badge == NULL:
-    $return = "/images/badges/administrator.png";
-    break;
-case $badge == "pfp_creator" and $custom_badge == NULL:
-    $return = "/images/badges/pfp_creator.png";
-    break;
-case $badge == "portal2" and $custom_badge == NULL:
-    $return = "/images/badges/portal2.png";
-    break;
-case $badge == "owner" and $custom_badge == NULL:
-    break;
-    return $return;
-}
-
 while ($row1 = $comments->fetch_assoc())
 {
     $author = $row1['comment_username'];
@@ -106,7 +74,8 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
 echo json_encode(array(
     'username' => $details["username"],
     'bio' => $details["bio"],
-    'badgeImage' => GetBadge($details["custom_badge"], $details["badge"]) ,
+    'badge' =>$details["badge"],
+    'customBadge' =>$details["custom_badge"],
     'customStars' => $details['custom_stars'],
     'customRank' => $details['custom_rank'],
     'status' => $details["status"],
