@@ -21,7 +21,7 @@ if (empty($_GET["user"]))
 
 function GetBadge(string $custom_badge, string $badge)
 {
-    $return;
+    $return = "";
 case $custom_badge != NULL:
     $get_custom_badge = NULL;
     GetCustomBadge($custom_badge, $conn);
