@@ -4,6 +4,8 @@ require ("../../lib/config/functions.php");
 require ("../../lib/profile.php");
 require ("../../forum/lib/forum_post_counter3.php");
 
+error_reporting(0);
+
 $count = 0;
 $jsonarr = array();
 $frarr = array();
@@ -47,10 +49,7 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
             $friend_details2 = NULL;
             $get_friend = NULL;
             GetUserFriend($friend_details1, $conn);
-            $frarr[$count] = array(
-                'name' => $friend_details2["username"],
-                'picture' => $friend_details2["pfp"]
-            );
+            $frarr[$count] = array('name' => $friend_details2["username"], 'pfp' => $friend_details2["pfp"]);
         }
     }
     if ($friend2->num_rows > 0)
@@ -58,15 +57,12 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
         $count = 0;
         while ($friend_details_2 = $friend2->fetch_assoc())
         {
-            $counter2++;
+            $count++;
             $friend_details3 = $friend_details_2['buddy1'];
             $friend_details4 = NULL;
             $get_friend2 = NULL;
             GetUserFriend2($friend_details1, $conn);
-            $frarr2[$count] = array(
-                'name' => $friend_details4["username"],
-                'picture' => $friend_details4["pfp"]
-            );
+            $frarr2[$count] = array('name' => $friend_details2["username"], 'pfp' => $friend_details2["pfp"]);
         }
     }
 }
