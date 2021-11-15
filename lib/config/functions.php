@@ -31,6 +31,17 @@ function GetCurrentUser($username, $conn) {
 	return $get;
 	return $user;
 }
+function GetCurrentUser2($username, $conn) {
+	global $user1;
+	global $get1;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $username); 
+	$query->execute();
+	$get1 = $query->get_result();
+	$user1 = $get1->fetch_assoc();
+	return $get1;
+	return $user1;
+}
 function GetUserFriend($friend_details1, $conn) {
 	global $friend_details2;
 	global $get_friend;

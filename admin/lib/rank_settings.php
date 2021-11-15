@@ -2,6 +2,14 @@
 // This php script 2
 // makes administrator able to play with users
 
+if (isset($_SESSION["user"])) {
+    $username = $_SESSION['user'];
+    $user1 = NULL;
+    $get1 = NULL;
+    GetCurrentUser2($username, $conn);
+}
+
+
 $counter = 0;
 
 $custom_badges = NULL;
@@ -29,7 +37,7 @@ if (isset($_GET["name"])) {
 }
 
 if (isset($_POST["update"])) {
-	if ($user["badge"] != "administrator") {
+	if ($user1["badge"] != "administrator") {
 		header("Location: /index.php"); 
 	} else {
 		$username = $_GET["name"];
