@@ -29,25 +29,29 @@ if (isset($_GET["name"])) {
 }
 
 if (isset($_POST["update"])) {
-	$username = $_GET["name"];
-	$badge = htmlspecialchars($_POST["badge"]);
-	$custom_badge = htmlspecialchars($_POST["custom_badge"]);
-	$custom_rank = htmlspecialchars($_POST["custom_rank"]);
-	$custom_stars = htmlspecialchars($_POST["custom_stars"]);
-    $custom_stars_converter = max(min($custom_stars,5),0);
-    if(preg_match("/^[a-zA-Z]+$/", $custom_stars)) {
-        exit("Numbers are only allowed in the custom stars input.");
-    }
-	UpdateRank($username, $badge, $custom_rank, $custom_stars_converter, $custom_badge, $conn);
-	
-	// add log 
-	$user_log = $_SESSION['user'];
-	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-	    $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-    }
-	AddLog("<b>$user_log</b> changed rank for $username", $ip, $conn);
-	
-	header("Location: rank_settings.php?name=" . $username);
+	if ($user["badge"] != "administrator") {
+		header("Location: /index.php"); 
+	} else {
+		$username = $_GET["name"];
+		$badge = htmlspecialchars($_POST["badge"]);
+		$custom_badge = htmlspecialchars($_POST["custom_badge"]);
+		$custom_rank = htmlspecialchars($_POST["custom_rank"]);
+		$custom_stars = htmlspecialchars($_POST["custom_stars"]);
+		$custom_stars_converter = max(min($custom_stars,5),0);
+		if(preg_match("/^[a-zA-Z]+$/", $custom_stars)) {
+			exit("Numbers are only allowed in the custom stars input.");
+		}
+		UpdateRank($username, $badge, $custom_rank, $custom_stars_converter, $custom_badge, $conn);
+		
+		// add log 
+		$user_log = $_SESSION['user'];
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+			$_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+		}
+		AddLog("<b>$user_log</b> changed rank for $username", $ip, $conn);
+		
+		header("Location: rank_settings.php?name=" . $username);
+	}
 }
 ?>

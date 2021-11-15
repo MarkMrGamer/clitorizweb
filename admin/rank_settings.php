@@ -1,6 +1,6 @@
-<?php require("lib/require/session.php"); ?>
-<?php require("../lib/config/functions.php"); ?>
 <?php require("../lib/config/database.php"); ?>
+<?php require("../lib/config/functions.php"); ?>
+<?php require("lib/require/session.php"); ?>
 <?php require("lib/rank_settings.php"); ?>
 <html>
    <head>

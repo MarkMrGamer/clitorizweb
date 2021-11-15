@@ -1,7 +1,7 @@
+<?php require("../lib/config/database.php"); ?>
+<?php require("../lib/config/functions.php"); ?>
 <?php require("lib/require/session.php"); ?>
 <?php require("lib/webserver_status.php"); ?>
-<?php require("../lib/config/functions.php"); ?>
-<?php require("../lib/config/database.php"); ?>
 <html>
    <head>
       <title>clitorizweb</title>
