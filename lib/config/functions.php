@@ -539,6 +539,7 @@ function ToggleAutoPlay($autoplay, $username, $conn) {
 	$query->execute();
 	return true;
 }
+
 function CheckUserInGroup($title, $username, $conn) {
 	global $usergroup;
     $query = $conn->prepare("SELECT * FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
@@ -561,4 +562,5 @@ function GetUserDetails($theuser, $conn) {
 	$get_details3 = $query->get_result();
 	return $get_details3;
 }
+
 ?>
