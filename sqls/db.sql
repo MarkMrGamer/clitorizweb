@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.3.29-MariaDB-0+deb10u1 - Debian 10
+-- Server version:               10.3.31-MariaDB-0ubuntu0.20.04.1 - Ubuntu 20.04
 -- Server OS:                    debian-linux-gnu
--- HeidiSQL Version:             11.0.0.5919
+-- HeidiSQL Version:             11.3.0.6295
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,6 +10,7 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 -- Dumping database structure for clitorizweb
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_bans` (
   `ban_note` varchar(100) DEFAULT NULL,
   `ban_username` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_comments` (
   `comment_date` varchar(100) DEFAULT current_timestamp(),
   `comment_profile` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_friends` (
   `buddy2` varchar(500) DEFAULT NULL,
   `status` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_groups` (
   `group_description` varchar(100) DEFAULT NULL,
   `group_photo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -87,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_group_users` (
   `group_user` varchar(100) DEFAULT NULL,
   `group_title` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_logs` (
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `ip` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=510 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_replies` (
   `post_thread` int(11) DEFAULT NULL,
   `post_date` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4746 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4760 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -122,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_reports` (
   `report_description` varchar(100) NOT NULL DEFAULT '0',
   `user_reporter` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -137,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_threads` (
   `thread_pinned` varchar(50) DEFAULT 'no',
   `thread_locked` varchar(50) DEFAULT 'no',
   PRIMARY KEY (`thread_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=294 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -165,11 +166,15 @@ CREATE TABLE IF NOT EXISTS `clitorizweb_users` (
   `ip` text DEFAULT NULL,
   `isbanned` varchar(50) DEFAULT 'false',
   `forum_moderator` varchar(50) DEFAULT 'false',
+  `audio_autoplay` varchar(50) DEFAULT 'true',
+  `htmlplacement` int(10) DEFAULT 1,
+  `dhtml` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
