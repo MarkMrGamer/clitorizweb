@@ -3,6 +3,7 @@
 <?php require("lib/config/functions.php"); ?>
 <?php require("lib/profile.php"); ?>
 <?php require("forum/lib/forum_post_counter3.php"); ?>
+<?php require("lib/customhtml.php"); ?>
 <html>
    <head>
       <title>clitorizweb - <?php echo $details["username"]; ?></title>
@@ -20,7 +21,9 @@
    </head>
    <body>
       <center>
+		 <?php CusHtml_getHtml($details["username"],1,$conn); ?>
          <?php require("lib/require/header/header.php"); ?>
+		 <?php CusHtml_getHtml($details["username"],2,$conn); ?>
          <table class="hmcontainer" width="440">
             <tbody>
                <tr>
@@ -39,6 +42,7 @@
                </tr>
             </tbody>
          </table>
+		 <?php CusHtml_getHtml($details["username"],3,$conn); ?>
          <div class="container">
             <div class="about">
                <table width="230" class="BorderStrip">
@@ -87,6 +91,7 @@
                   </tbody>
                </table>
             </div>
+			<?php CusHtml_getHtml($details["username"],4,$conn); ?>
             <div class="contact">
                <table class="BorderStrip" width="205">
                   <tbody>
@@ -203,6 +208,7 @@
                   }
                   ?>
             </div>
+			<?php CusHtml_getHtml($details["username"],5,$conn); ?>
             <?php 
                if ($details["video_access"] == "true") {
                ?>
@@ -331,11 +337,14 @@
                   </tbody>
                </table>
             </div>
+			
             <?php
                }
                ?>
          </div>
+		 <?php CusHtml_getHtml($details["username"],6,$conn); ?>
          <?php require("lib/require/footer/footer.php"); ?>
+		 <?php CusHtml_getHtml($details["username"],7,$conn); ?>
       </center>
    </body>
 </html>

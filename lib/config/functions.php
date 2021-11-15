@@ -31,6 +31,17 @@ function GetCurrentUser($username, $conn) {
 	return $get;
 	return $user;
 }
+function GetCurrentUser2($username, $conn) {
+	global $user1;
+	global $get1;
+	$query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $username); 
+	$query->execute();
+	$get1 = $query->get_result();
+	$user1 = $get1->fetch_assoc();
+	return $get1;
+	return $user1;
+}
 function GetUserFriend($friend_details1, $conn) {
 	global $friend_details2;
 	global $get_friend;
@@ -528,4 +539,28 @@ function ToggleAutoPlay($autoplay, $username, $conn) {
 	$query->execute();
 	return true;
 }
+
+function CheckUserInGroup($title, $username, $conn) {
+	global $usergroup;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
+	$query->bind_param("ss", $username, $title);
+	$query->execute();
+	$usergroup = $query->get_result();
+	return $usergroup;
+}
+function LeaveGroup($title, $username, $conn) {
+	$query = $conn->prepare("DELETE FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
+	$query->bind_param("ss", $username, $title); 
+	$query->execute();
+	return true;
+}
+function GetUserDetails($theuser, $conn) {
+	global $get_details3;
+    $query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
+	$query->bind_param("s", $theuser);
+	$query->execute();
+	$get_details3 = $query->get_result();
+	return $get_details3;
+}
+
 ?>

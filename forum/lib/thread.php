@@ -54,7 +54,7 @@ if (isset($_GET["delete_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($thread_details["thread_author"] != $_SESSION["user"] AND $user["badge"] != "administrator" AND $user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
+	    if ($thread_details["thread_author"] != $_SESSION["user"] AND $user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("Can't delete someone's other threads.");
 		} else {
 			$thread_id = $thread_details["thread_id"];
@@ -83,7 +83,7 @@ if (isset($_GET["pin_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
+	    if ($user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("You are not allowed to pin threads.");
 		} elseif ($thread_details["thread_pinned"] != "no") {
 			exit("Thread is already pinned.");
@@ -114,7 +114,7 @@ if (isset($_GET["unpin_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
+	    if ($user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("You are not allowed to unpin threads.");
 	    } elseif ($thread_details["thread_pinned"] != "yes") {
 			exit("Thread is already unpinned.");
@@ -145,7 +145,7 @@ if (isset($_GET["lock_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
+	    if ($user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("You are not allowed to lock threads.");
 		} elseif ($thread_details["thread_locked"] != "no") {
 			exit("Thread is already locked.");
@@ -176,7 +176,7 @@ if (isset($_GET["unlock_thread"])) {
 	GetThread($id, $conn);
 	if ($thread->num_rows == 1) {
 		$thread_details = $thread->fetch_assoc();
-	    if ($user["badge"] != "administrator" OR $user["badge"] != "moderator"  )  {
+	    if ($user["badge"] != "administrator" AND $user["badge"] != "moderator")  {
 			exit("You are not allowed to unlock threads.");
 	    } elseif ($thread_details["thread_locked"] != "yes") {
 			exit("Thread is already unlocked.");

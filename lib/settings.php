@@ -2,6 +2,8 @@
 //settings php script
 //date created: August 2, 2021
 
+//edited by doom to include dhtml stuff
+
 $counter = 0;
 $username = $_SESSION['user'];
 $user = NULL;
@@ -22,11 +24,18 @@ if (isset($_POST["update"])) {
 
 	$status = htmlspecialchars($_POST["status"]);
 	$css = $_POST["css"];
+	$dhtml = $_POST["dhtml"];
+	
+	$htmlfilter = array("<?php", "?>", "behavior: url", ".php","<script>","</script>");
+    $filtered = str_replace($htmlfilter, "", $dhtml);
+	
+	$placement = $_POST["place"];
 	//space my code...
 	$cssfilter = array("<?php", "?>", "behavior: url", ".php","<script>","</script>","</style>");
     $newcss = str_replace($cssfilter, "", $css);
 	$bio = htmlspecialchars($_POST["bio"]);
-	UpdateProfile($username, $status, $bio, $newcss, $conn);
+	UpdateProfile($username, $status, $bio, $newcss, $filtered, $placement, $conn);
+	
 	header("Location: settings.php");
 }
 
