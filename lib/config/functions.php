@@ -83,9 +83,9 @@ function AddComment($username, $comment, $user, $conn) {
 	$query->execute();
 	return true;
 }
-function UpdateProfile($username, $status, $bio, $newcss, $conn) {
-	$query = $conn->prepare("UPDATE clitorizweb_users SET css = ?, bio = ?, status = ? WHERE username = ?");
-	$query->bind_param("ssss", $newcss, $bio, $status, $username); 
+function UpdateProfile($username, $status, $bio, $newcss, $dhtml,$placement, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET css = ?, bio = ?, status = ?, dhtml = ?,htmlplacement = ? WHERE username = ?");
+	$query->bind_param("ssssis", $newcss, $bio, $status,$dhtml,$placement, $username); 
 	$query->execute();
 	return true;
 }
@@ -527,27 +527,5 @@ function ToggleAutoPlay($autoplay, $username, $conn) {
 	$query->bind_param("ss", $autoplay, $username); 
 	$query->execute();
 	return true;
-}
-function CheckUserInGroup($title, $username, $conn) {
-	global $usergroup;
-    $query = $conn->prepare("SELECT * FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
-	$query->bind_param("ss", $username, $title);
-	$query->execute();
-	$usergroup = $query->get_result();
-	return $usergroup;
-}
-function LeaveGroup($title, $username, $conn) {
-	$query = $conn->prepare("DELETE FROM clitorizweb_group_users WHERE group_user = ? AND group_title = ?");
-	$query->bind_param("ss", $username, $title); 
-	$query->execute();
-	return true;
-}
-function GetUserDetails($theuser, $conn) {
-	global $get_details3;
-    $query = $conn->prepare("SELECT * FROM clitorizweb_users WHERE username = ?");
-	$query->bind_param("s", $theuser);
-	$query->execute();
-	$get_details3 = $query->get_result();
-	return $get_details3;
 }
 ?>
