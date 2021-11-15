@@ -24,6 +24,17 @@
                         <label>change password:</label> <input class="UpdateText" type="password" name="change_password"><br><br>
                         <label style="vertical-align: top;">css:</label> <textarea name="css" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["css"]; ?></textarea><br><br>
                         <label style="vertical-align: top;">bio:</label> <textarea name="bio" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["bio"]; ?></textarea><br><br>
+						<label style="vertical-align: top;">custom html:</label> <textarea name="dhtml" class="UpdateText" style="width:300px;height:100px;"><?php echo $user["dhtml"]; ?></textarea><br><br>
+						<label style="vertical-align: top;">custom html placement:</label><select name="place" id="place" value="<?php echo $user["htmlplacement"]; ?>">
+							<option value="1">top of the screen,ontop of banner</option>
+							<option value="2">ontop of profile bar</option>
+							<option value="3">ontop of media player and about</option>
+							<option value="4">ontop of contact</option>
+							<option value="5">ontop of video player and comments</option>
+							<option value="6">ontop of footer</option>
+							<option value="7">bottom of the screen,below footer</option>
+						</select><br><br><br>
+						
 						<label style="vertical-align: top;">audio autoplay:</label> <input type="checkbox" id="autoplay_toggle" name="autoplay_toggle" <?php if ($user["audio_autoplay"] == "true") { echo "checked=\"checked\""; } ?> value="true"><br><br>
                         <label>profile picture:</label> <input type="file" name="fileupload" id="fileupload" /><input class="updateSubmit" type="submit" name="clear1" value="clear"><br><br>
                         <label>audio profile:</label> <input type="file" name="fileupload2" id="fileupload2" /><input class="updateSubmit" type="submit" name="clear2" value="clear"><br>
