@@ -145,10 +145,10 @@
                   </tbody>
                </table>
             </div>
+	   <?php 
+		  if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
+		  ?>
             <div class="friends">
-               <?php 
-                  if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
-                  ?>
                <table class="BorderStrip" width="230">
                   <tbody>
                      <tr class="blackstrip3" height="20">
@@ -204,10 +204,10 @@
                      </tr>
                   </tbody>
                </table>
-               <?php
-                  }
-                  ?>
             </div>
+		   <?php
+			  }
+			  ?>
 			<?php CusHtml_getHtml($details["username"],5,$conn); ?>
             <?php 
                if ($details["video_access"] == "true") {
@@ -289,7 +289,7 @@
                } else {
                ?>
             <div class="comments">
-               <table width="205" class="BorderStrip">
+               <table width="230" class="BorderStrip">
                   <tbody>
                      <tr class="blackstrip3" height="20">
                         <td class="blackstrip3">Comments</td>

@@ -35,7 +35,7 @@ CheckDB($username, $conn);
 
 //here is recaptcha for security i guess
 $response = $_POST["g-recaptcha-response"];
-$secretKey = "6Lcamg4cAAAAAMAVYn5La74K5QITRcrrqqFXdJ94";
+$secretKey = "SECRET_KEY_HERE";
 $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($response);
 $response = file_get_contents($url);
