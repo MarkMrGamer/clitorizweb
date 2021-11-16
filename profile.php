@@ -20,28 +20,43 @@
       <?php } ?>
    </head>
    <body>
-      <center>
 		 <?php CusHtml_getHtml($details["username"],1,$conn); ?>
          <?php require("lib/require/header/header.php"); ?>
 		 <?php CusHtml_getHtml($details["username"],2,$conn); ?>
-         <table class="hmcontainer" width="440">
-            <tbody>
-               <tr>
-                  <td class="hmcontainer2">
-                     <table>
-                        <tbody>
-                           <tr>
-                              <td><img class="pfp" alt="" src="<?php require("lib/pfp2.php"); ?>"><br></td>
-                              <td style="vertical-align: top;"><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $details["username"]; ?>"><?php echo $details["username"]; ?></a></font> <?php if (!empty($details['badge'])) { ?><img src="<?php $custom_badge = $details['custom_badge']; $badge = $details['badge']; require("lib/badge.php"); ?>"><?php } ?> <?php require("lib/friend2.php"); ?> <?php if (isset($username)) { if ($user["badge"] == "administrator") { ?><font size="-1" class="UserProfile"><a href="/admin/user.php?name=<?php echo $details["username"]; ?>">Edit User</a></font><?php } } ?><br>
-                                 <?php if (!empty($details["status"])) { ?><font class="UserProfile" size="-2"><?php echo $details["status"]; ?></font><br><?php } ?><?php $counter_posts = $post_counter3; $custom_stars = $details["custom_stars"]; $custom_rank = $details["custom_rank"]; require("lib/rank.php"); ?></font>
-                              </td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
+  <?php if ($details["old_header"] == "true") { ?>
+             <table style="margin-bottom: 5px;" class="hmcontainer" width="440">
+                <tbody>
+                   <tr>
+                      <td class="hmcontainer2">
+                         <table>
+                            <tbody>
+                               <tr>
+                                  <td><img class="pfp" alt="" src="<?php require("lib/pfp2.php"); ?>"><br></td>
+                                  <td style="vertical-align: top;"><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $details["username"]; ?>"><?php echo $details["username"]; ?></a></font> <?php if (!empty($details['badge'])) { ?><img src="<?php $custom_badge = $details['custom_badge']; $badge = $details['badge']; require("lib/badge.php"); ?>"><?php } ?> <?php require("lib/friend2.php"); ?> <?php if (isset($username)) { if ($user["badge"] == "administrator") { ?><font size="-1" class="UserProfile"><a href="/admin/user.php?name=<?php echo $details["username"]; ?>">Edit User</a></font><?php } } ?><br>
+                                     <?php if (!empty($details["status"])) { ?><font class="UserProfile" size="-2"><?php echo $details["status"]; ?></font><br><?php } ?><?php $counter_posts = $post_counter3; $custom_stars = $details["custom_stars"]; $custom_rank = $details["custom_rank"]; require("lib/rank.php"); ?></font>
+                                  </td>
+                               </tr>
+                            </tbody>
+                         </table>
+                      </td>
+                   </tr>
+                </tbody>
+             </table>
+		<?php } else { ?>
+			<div id="profile" class="white-box">
+			  <div id="profile-banner">
+				<img id="banner" src="<?php require("lib/banner2.php"); ?>">
+			  </div>
+
+			<div id="profile-info">
+			  <div id="pfp-container">
+				<img id="profile-picture" src="<?php require("lib/pfp2.php"); ?>">
+			   </div>
+			  <div id="info-container" style="">
+				<a href="profile.php?user=<?php echo $details["username"]; ?>"><font style="" size="+1"><?php  if ($details['nickname'] == NULL) { echo $details['username'];  } else {  echo $details['nickname']; } ?></a> <img src="<?php $custom_badge = $details['custom_badge']; $badge = $details['badge']; require("lib/badge.php"); ?>"><br><font class="Profile" size="1"><b>@<?php echo $details["username"]; ?></b><?php if (isset($username)) { if ($user["badge"] == "administrator") { ?><font size="1" class="UserProfile"><a href="/admin/user.php?name=<?php echo $details["username"]; ?>">(Edit User)</a></font><?php } } ?></font>
+			  </div>
+			</div>
+         <?php } ?>
 		 <?php CusHtml_getHtml($details["username"],3,$conn); ?>
          <div class="container">
             <div class="about">
@@ -145,10 +160,10 @@
                   </tbody>
                </table>
             </div>
-	   <?php 
-		  if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
-		  ?>
             <div class="friends">
+               <?php 
+                  if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
+                  ?>
                <table class="BorderStrip" width="230">
                   <tbody>
                      <tr class="blackstrip3" height="20">
@@ -204,10 +219,10 @@
                      </tr>
                   </tbody>
                </table>
+               <?php
+                  }
+                  ?>
             </div>
-		   <?php
-			  }
-			  ?>
 			<?php CusHtml_getHtml($details["username"],5,$conn); ?>
             <?php 
                if ($details["video_access"] == "true") {
@@ -289,7 +304,7 @@
                } else {
                ?>
             <div class="comments">
-               <table width="230" class="BorderStrip">
+               <table width="205" class="BorderStrip">
                   <tbody>
                      <tr class="blackstrip3" height="20">
                         <td class="blackstrip3">Comments</td>
@@ -345,6 +360,5 @@
 		 <?php CusHtml_getHtml($details["username"],6,$conn); ?>
          <?php require("lib/require/footer/footer.php"); ?>
 		 <?php CusHtml_getHtml($details["username"],7,$conn); ?>
-      </center>
    </body>
 </html>

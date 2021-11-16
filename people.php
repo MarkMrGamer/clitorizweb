@@ -22,8 +22,9 @@
                         <tbody>
                            <tr>
                               <td><img src="<?php require("lib/pfp.php"); ?>" height="32" width="32" border="1"><br></td>
-                              <td><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $row['username']; ?>"><?php echo $row['username']; ?></a></font> <?php if (!empty($row['badge'])) { ?><img src="<?php  $custom_badge = $row['custom_badge']; $badge = $row['badge']; require("lib/badge.php"); ?>"><?php } ?><br>
-                                 <?php if (!empty($row['status'])) { ?><font class="UserProfile" size="-2"><?php echo $row['status']; ?></font><?php } ?> <font class="UserProfile" size="-2"><?php require("lib/friend3.php"); ?></font>
+                              <td><font size="+1" class="UserProfile"><a href="profile.php?user=<?php echo $row['username']; ?>"><?php  if ($row['nickname'] == NULL) { echo $row['username'];  } else {  echo $row['nickname']; } ?></a></font> <?php if (!empty($row['badge'])) { ?><img src="<?php  $custom_badge = $row['custom_badge']; $badge = $row['badge']; require("lib/badge.php"); ?>"><?php } ?><br>
+                                 <font class="UserProfile" size="-2"><b>@<?php echo $row['username']; ?></b></font><font class="UserProfile" size="-2"><?php require("lib/friend3.php"); ?></font><br>
+								 <?php if (!empty($row['status'])) { ?><font class="UserProfile" size="-2"><?php echo $row['status']; ?></font><?php } ?>
                               </td>
                            </tr>
                         </tbody>
@@ -37,5 +38,6 @@
             ?>
          <?php require("lib/require/footer/footer.php"); ?>
       </center>
+	  
    </body>
 </html>

@@ -2,8 +2,6 @@
 //settings php script
 //date created: August 2, 2021
 
-//edited by doom to include dhtml stuff
-
 $counter = 0;
 $username = $_SESSION['user'];
 $user = NULL;
@@ -22,6 +20,16 @@ if (isset($_POST["update"])) {
         ToggleAutoPlay($autoplay, $username, $conn);
     }
 
+	if (isset($_POST["oldheader_toggle"])) {
+		$oldheader = "true";
+		ToggleOldHeader($oldheader, $username, $conn);
+	}
+
+	if (!isset($_POST["oldheader_toggle"])) {
+		$oldheader = "false";
+		ToggleOldHeader($oldheader, $username, $conn);
+	}
+
 	$status = htmlspecialchars($_POST["status"]);
 	$css = $_POST["css"];
 	$dhtml = $_POST["dhtml"];
@@ -34,7 +42,8 @@ if (isset($_POST["update"])) {
 	$cssfilter = array("<?php", "?>", "behavior: url", ".php","<script>","</script>","</style>");
     $newcss = str_replace($cssfilter, "", $css);
 	$bio = htmlspecialchars($_POST["bio"]);
-	UpdateProfile($username, $status, $bio, $newcss, $filtered, $placement, $conn);
+	$nickname = htmlspecialchars($_POST["nickname"]);
+	UpdateProfile($nickname, $username, $status, $bio, $newcss, $filtered, $placement, $conn);
 	
 	header("Location: settings.php");
 }
@@ -117,6 +126,40 @@ if (isset($_FILES["fileupload3"])) {
 			    header("Location: settings.php");
 		    }
 	    }
+    }
+}
+
+if (isset($_FILES["fileupload4"])) {
+    
+    //Trashed code..
+    if ($_FILES['fileupload4']['name'] == "") {
+        $counter = 3;
+    } else {
+        $banner = rand(28,2147483647);
+        $directory = $_SERVER["DOCUMENT_ROOT"] . "/images/banners/";
+        $directory2 = "/images/banners/";
+        $file = $directory . basename($_FILES["fileupload4"]["name"]);
+        $file2 = basename($_FILES["fileupload4"]["name"]);
+        $imageFileType = strtolower(pathinfo($file,PATHINFO_EXTENSION));
+        $newfile = $directory . $banner . "." . "gif";
+        $newfile2 = $directory2 . $banner . "." . "gif";
+        $imageCheck = getimagesize($_FILES["fileupload4"]["tmp_name"]);
+
+        switch (true) {
+            case $imageCheck == false:
+            $counter = 1;
+            break;
+            case $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif":
+            $counter = 2;
+            break;
+            default:
+            if (move_uploaded_file($_FILES["fileupload4"]["tmp_name"], $newfile)) {
+                UpdateBanner($banner, $username, $conn);
+                header("Location: settings.php");
+            } else {
+                echo "File didn't get uploaded?";
+            }
+        }
     }
 }
 
