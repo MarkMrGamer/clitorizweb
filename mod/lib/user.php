@@ -4,6 +4,13 @@
 
 // Edited by doom
 
+if (isset($_SESSION["user"])) {
+    $username = $_SESSION['user'];
+    $user1 = NULL;
+    $get1 = NULL;
+    GetCurrentUser2($username, $conn);
+}
+
 $counter = 0;
 
 $users = NULL;
@@ -33,7 +40,7 @@ if (isset($_GET["name"])) {
 }
 
 if (isset($_POST["clear1"])) {
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		$pfp = 0;
@@ -51,7 +58,7 @@ if (isset($_POST["clear1"])) {
 }
 
 if (isset($_POST["clear2"])) {
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		$song = 0;
@@ -70,7 +77,7 @@ if (isset($_POST["clear2"])) {
 }
 
 if (isset($_POST["clear3"])) {
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		$video = 0;
@@ -88,7 +95,7 @@ if (isset($_POST["clear3"])) {
 }
 
 if (isset($_FILES["fileupload2"])) {
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		//Trashed code..
@@ -130,7 +137,7 @@ if (isset($_FILES["fileupload2"])) {
 
 if (isset($_FILES["fileupload3"])) {
 	
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		//Trashed code..
@@ -172,7 +179,7 @@ if (isset($_FILES["fileupload3"])) {
 
 if (isset($_FILES["fileupload"])) {
 	
-	if ($user["badge"] != "moderator") {
+	if ($user1["badge"] != "moderator") {
 		header("Location: /index.php"); 
 	} else {
 		//Trashed code..
