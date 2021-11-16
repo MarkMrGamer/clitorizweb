@@ -6,6 +6,7 @@
     vertical-align: top;
     padding-left: 5px;
     word-break: break-word;
+	white-space: pre-wrap;
 }
 
 .organize {
@@ -186,6 +187,11 @@ td.hmcontainer3 {
 
 body {
 	background-color: #7997C6;
+	font-family: Verdana, Helvetica, Arial;
+	padding: 0;
+	width: 440px;
+	margin: auto;
+	margin-top: 5px;
 }
 
 .banner {
@@ -208,8 +214,8 @@ body {
     "media-player about"
     "contact friends";
   width: 440px;
-  padding-top: 6px;
   padding-bottom: 6px;
+  padding-top: 6px;
 }
 
 .friendicon {
@@ -247,3 +253,53 @@ body {
 .contact { grid-area: contact; }
 
 .friends { grid-area: friends; }
+
+#profile {
+  padding: 0px;
+  width: 438px;
+  height: 127px;
+}
+#banner {
+  object-fit: cover;
+  width: 438px;
+  height: 78px;
+  border-bottom: 1px solid black;
+  position: static;
+}
+#profile-info {
+  padding: 6px;
+}
+#profile-picture {
+  border: 1px solid black;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  bottom: -32px;
+}
+#pfp-container {
+  width: 64px;
+  position: relative;
+}
+#info-container {
+  position: relative;
+  left: 71px;
+  top: -2px;
+}
+.white-box {
+	margin-top: 5px;
+	border: 1px Solid black;
+	background-color: white;
+	padding: 3px;
+	color: black;
+}
+
+#main {
+	margin-left: auto;
+	margin-right: auto;
+	width: 440px;
+}
+
+#info-container a {
+text-decoration: none;
+color: black;
+}
