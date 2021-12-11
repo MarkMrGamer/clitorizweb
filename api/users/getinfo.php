@@ -1,4 +1,13 @@
 <?php
+
+if (empty($_GET["user"]))
+{
+    echo json_encode(array(
+        'error' => "No user provided"
+    ));
+    die();
+}
+
 require ("../../lib/config/database.php");
 require ("../../lib/config/functions.php");
 require ("../../lib/profile.php");
@@ -17,14 +26,6 @@ $badge = $details["badge"];
 $cbadge;
 
 header("Content-Type: application/json");
-
-if (empty($_GET["user"]))
-{
-    echo json_encode(array(
-        'error' => "No user provided"
-    ));
-    die();
-}
 
 while ($row1 = $comments->fetch_assoc())
 {
