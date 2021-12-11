@@ -103,20 +103,19 @@ switch(true) {
 echo json_encode(array(
     'username' => $details["username"],
     'bio' => $details["bio"],
-    'badge' =>$details["badge"],
+    'badge' =>$cbadge ,
     'customStars' => $details['custom_stars'],
     'customRank' => $details['custom_rank'],
-    'oldHeader' => $details["old_header"],
+    'oldHeader' => filter_var($details["old_header"], FILTER_VALIDATE_BOOLEAN),
     'status' => $details["status"],
     'audio' => "http://clitoriz.cf/songs/" . $details["song"] . "." . $details["audio_file_type"],
-    'audioAutoplay' => $details["audio_autoplay"],
-    'videoAccess' => $details['video_access'],
+    'audioAutoplay' => filter_var($details["audio_autoplay"], FILTER_VALIDATE_BOOLEAN),
+    'videoAccess' => filter_var($details["video_access"], FILTER_VALIDATE_BOOLEAN),
     'video' => "http://clitoriz.cf/videos/" . $details["video"] . ".mp4",
     'css' => base64_encode($details['css']) ,
     'picture' => "http://clitoriz.cf/images/pfps/" . $details['pfp'] . '.gif',
     'comments' => $jsonarr,
-    'friend' => $frarr,
-    'friend2' => $frarr2
+    'friends' => $frarr,
 ));
 
 ?>
