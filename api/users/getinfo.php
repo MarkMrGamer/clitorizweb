@@ -24,6 +24,7 @@ $cccount = 0;
 $custom_badge = $details["custom_badge"];
 $badge = $details["badge"];
 $cbadge;
+$cbanner;
 
 header("Content-Type: application/json");
 
@@ -73,6 +74,14 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
 }
 
 
+if ($details['banner'] != 0) { 
+    $cbanner = "http://clitoriz.cf/images/banners/".$details['banner'].".gif"; 
+ } else { 
+        $banner_id = rand(0,4);
+	$user_banner = $details['username'];
+	UpdateUsersZeroBanner($banner_id, $user_banner, $conn);
+	$cbanner = "http://clitoriz.cf/images/banners/".$details['banner'].".gif"; 
+ } 
 
 switch(true) {
 	case $custom_badge != NULL:
