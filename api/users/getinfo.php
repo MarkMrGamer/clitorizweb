@@ -79,7 +79,6 @@ if ($details['banner'] != 0) {
  } else { 
         $banner_id = rand(0,4);
 	$user_banner = $details['username'];
-	UpdateUsersZeroBanner($banner_id, $user_banner, $conn);
 	$cbanner = "http://clitoriz.cf/images/banners/".$details['banner'].".gif"; 
  } 
 
@@ -114,6 +113,7 @@ echo json_encode(array(
     'username' => $details["username"],
     'bio' => $details["bio"],
     'badge' =>$cbadge ,
+    'banner' =>$cbanner ,
     'customStars' => $details['custom_stars'],
     'customRank' => $details['custom_rank'],
     'oldHeader' => filter_var($details["old_header"], FILTER_VALIDATE_BOOLEAN),
