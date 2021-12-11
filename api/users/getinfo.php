@@ -12,6 +12,9 @@ $frarr = array();
 $frarr2 = array();
 $ccount = 0;
 $cccount = 0;
+$custom_badge = $details["custom_badge"];
+$badge = $details["badge"];
+$cbadge;
 
 header("Content-Type: application/json");
 
@@ -68,20 +71,49 @@ if ($friend->num_rows > 0 or $friend2->num_rows > 0)
     }
 }
 
+
+
+switch(true) {
+	case $custom_badge != NULL:
+       GetCustomBadge($custom_badge, $conn);
+	   $badge_detail = $get_custom_badge->fetch_assoc();
+	   $cbadge = "http://clitoriz.cf/images/custom_badges/".$badge_detail["badge_pic"].".gif";
+	   break;
+	case $badge == "user" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/user.png";
+	   break;
+	case $badge == "verified" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/verified.png";
+	   break;
+	case $badge == "moderator" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/moderator.png";
+	   break;
+	case $badge == "administrator" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/administrator.png";
+	   break;
+	case $badge == "pfp_creator" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/pfp_creator.png";
+	   break;
+    case $badge == "portal2" AND $custom_badge == NULL:
+	    $cbadge = "http://clitoriz.cf/images/badges/portal2.png";
+	   break;
+	case $badge == "owner" AND $custom_badge == NULL:
+	   break;
+}
 echo json_encode(array(
     'username' => $details["username"],
     'bio' => $details["bio"],
     'badge' =>$details["badge"],
-    'customBadge' =>$details["custom_badge"],
     'customStars' => $details['custom_stars'],
     'customRank' => $details['custom_rank'],
+    'oldHeader' => $details["old_header"],
     'status' => $details["status"],
-    'audio' => $details["song"] . "." . $details["audio_file_type"],
+    'audio' => "http://clitoriz.cf/songs/" . $details["song"] . "." . $details["audio_file_type"],
     'audioAutoplay' => $details["audio_autoplay"],
     'videoAccess' => $details['video_access'],
-    'video' => $details["video"] . ".mp4",
+    'video' => "http://clitoriz.cf/videos/" . $details["video"] . ".mp4",
     'css' => base64_encode($details['css']) ,
-    'picture' => $details['pfp'] . '.gif',
+    'picture' => "http://clitoriz.cf/images/pfps/" . $details['pfp'] . '.gif',
     'comments' => $jsonarr,
     'friend' => $frarr,
     'friend2' => $frarr2
