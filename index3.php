@@ -22,8 +22,7 @@ if (isset($_POST["auth"])) {
    }
 </style>
 <link rel="stylesheet" href="styles/alpha.css">
-<center>
+
    <form action="index.php" method="POST">
       <label>password:</label> <input class="loginText" type="password" name="password"><br><br><input class="loginSubmit" type="submit" name="auth" value="Activate">
    </form>
-</center>

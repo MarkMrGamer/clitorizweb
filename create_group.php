@@ -10,7 +10,7 @@
       <link rel="shortcut icon" href="/favicon.ico" />
    </head>
    <body>
-      <center>
+      
          <?php require("lib/require/header/header.php"); ?>
          <table class="hmcontainer" width="440">
             <tbody>
@@ -32,6 +32,6 @@
             </tbody>
          </table>
          <?php require("lib/require/footer/footer.php"); ?>
-      </center>
+      
    </body>
 </html>

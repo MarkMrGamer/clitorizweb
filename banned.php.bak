@@ -18,9 +18,9 @@
                      <br><br><font size="1"><b>Moderator note</b>: <?php echo $banned["ban_note"]; ?></font><br>
                      <br>
                      <font size="1">If you try to bypass your ban or other things like ban evading, <br> your account ban time will be extended.</font><br><br>
-                     <center>
+                     
                         <form action="/logout.php"><input type="submit" value="Log Out" class="updateSubmit"></form>
-                     </center>
+                     
                   </td>
                </tr>
             </tbody>

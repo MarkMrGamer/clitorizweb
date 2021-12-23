@@ -9,7 +9,7 @@
       <link rel="shortcut icon" href="/favicon.ico" />
    </head>
    <body>
-      <center>
+      
          <?php require("lib/require/header/header.php"); ?>
          <?php 
             while($row = $users->fetch_assoc()) { 
@@ -37,7 +37,7 @@
             }
             ?>
          <?php require("lib/require/footer/footer.php"); ?>
-      </center>
+      
 	  
    </body>
 </html>
