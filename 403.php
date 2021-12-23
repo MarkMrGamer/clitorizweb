@@ -5,7 +5,7 @@
   <head>
     <title>clitorizweb
     </title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body>
