@@ -14,9 +14,12 @@
             <tbody>
                <tr>
                   <td class="hmcontainer2"><font size="+1"><b>webserver status</b></font><br><br>
-                     <b>Allocated space for PHP:</b> <b><?php echo convert(memory_get_usage(true)); ?></b><br>
-                     <b>PHP version:<b> <?php echo phpversion() ?><br>
-                     <b>CPU usage:</b> <?php echo $cpu['sys'] . "%"; ?>
+                     <b>Allocated space for PHP:</b> <b><?php echo convert(memory_get_usage(true)); ?></b><br><br>
+                     <b>PHP version:<b> <?php echo phpversion() ?><br><br>
+                     <b>FFMPEG version:<b> <?php echo str_replace("ffmpeg version ", "", substr( shell_exec('ffmpeg -version') , 0, strpos( shell_exec('ffmpeg -version') , "Copyright (c)"))) ?><br><br>
+                     <b>OS version:<b> <?php echo php_uname() ?><br><br>
+                    
+                     <b>CPU usage:</b> <?php echo $cpu['sys'] . "%"; ?><br><br>
                   </td>
                </tr>
             </tbody>

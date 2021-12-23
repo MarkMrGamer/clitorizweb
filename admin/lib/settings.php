@@ -72,7 +72,8 @@ if (isset($_POST["update"])) {
 		$cssfilter = array("<?php", "?>", "behavior: url", ".php");
 		$newcss = str_replace($cssfilter, "", $css);
 		$bio = htmlspecialchars($_POST["bio"]);
-		UpdateProfile($username, $status, $bio, $newcss, $conn);
+		$nickname = $details["nickname"];
+		UpdateProfile($nickname, $username, $status, $bio, $newcss, $conn);
 		// add log 
 		$user_log = $_SESSION['user'];
 		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
