@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="styles/admin.css">
    </head>
    <body>
-      <center>
+      
          <?php require("lib/require/header/header.php"); ?>
          <div style="padding-top: 5px;">
             <table width="440" class="BorderStrip" border="1">
@@ -49,6 +49,6 @@
             </table>
          </div>
          <?php require("../lib/require/footer/footer.php"); ?>
-      </center>
+      
    </body>
 </html>

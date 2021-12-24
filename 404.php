@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body>
-    <center>
+    
       <?php require($_SERVER['DOCUMENT_ROOT'] . "/lib/require/header/header.php"); ?>
       <table class="hmcontainer" width="440">
         <tbody>
@@ -26,6 +26,6 @@
         </tbody>
       </table>
       <?php require($_SERVER['DOCUMENT_ROOT'] . "/lib/require/footer/footer.php"); ?>
-    </center>
+    
   </body>
 </html>
