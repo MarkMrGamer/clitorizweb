@@ -6,7 +6,6 @@
     vertical-align: top;
     padding-left: 5px;
     word-break: break-word;
-	white-space: pre-wrap;
 }
 
 .organize {
@@ -23,7 +22,6 @@
 .Profile {
     vertical-align: top;
     word-break: break-word;
-	white-space:pre-wrap;
 }
 
 .banner-alert {
@@ -41,6 +39,7 @@
 }
 
 .UserProfile a {
+	vertical-align: middle;
 	text-decoration: none;
 	color: black;
 }
@@ -150,20 +149,18 @@ video {
     font-size: 12px;
 }
 
-.loginSubmit {
+.loginSubmit, .updateSubmit, button {
     border: black solid 1px;
     font-size: 11px;
     height: 23px;
     font-family: Verdana;
     font-weight: bold;
+    background-color: #E9E9ED;
 }
 
-.updateSubmit {
-    border: black solid 1px;
-    font-size: 11px;
-    height: 23px;
-    font-family: Verdana;
-    font-weight: bold;
+.loginSubmit:hover, .updateSubmit:hover, button:hover {
+	background-color: #D9D9DB;
+	border: #4F4F4F solid 1px;
 }
 
 td.hmcontainer2 {
@@ -186,12 +183,18 @@ td.hmcontainer3 {
 }
 
 body {
-	background-color: #7997C6;
+	background-color: #9AB7CE;
 	font-family: Verdana, Helvetica, Arial;
 	padding: 0;
 	width: 440px;
 	margin: auto;
 	margin-top: 5px;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background-color: #000;
 }
 
 .banner {
@@ -219,30 +222,77 @@ body {
 }
 
 .friendicon {
-    background: url(/images/icons/friend_user.png) no-repeat;
+    background: url(/images/icons/silk/user_add.png) no-repeat;
     width: 16px;
-    height: 15px;
+    height: 16px;
+    display: inline-block;
+}
+
+.unfriendicon {
+    background: url(/images/icons/silk/user_delete.png) no-repeat;
+    width: 16px;
+    height: 16px;
     display: inline-block;
 }
 
 .blockicon {
-    background: url(/images/icons/block_user.png) no-repeat;
+    background: url(/images/icons/silk/cancel.png) no-repeat;
     width: 16px;
-    height: 15px;
+    height: 16px;
+    display: inline-block;
+	vertical-align: middle;
+}
+
+.pendingicon {
+    background: url(/images/icons/silk/user_pending.png) no-repeat;
+	width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.accepticon {
+    background: url(/images/icons/silk/user_accept.png) no-repeat;
+	width: 16px;
+    height: 16px;
     display: inline-block;
 }
 
 .reporticon {
-    background: url(/images/icons/report_user.png) no-repeat;
+    background: url(/images/icons/silk/report_user.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+	vertical-align: middle;
+}
+
+.cogicon {
+    background: url(/images/icons/silk/cog.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    display: inline-block;
+	vertical-align: middle;
+}
+
+.messageicon {
+    background: url(/images/icons/silk/email.png) no-repeat;
     width: 16px;
     height: 15px;
     display: inline-block;
 }
 
-.messageicon {
-    background: url(/images/icons/send_message.png) no-repeat;
+.binicon {
+    background: url(/images/icons/silk/bin.png) no-repeat;
     width: 16px;
     height: 15px;
+    display: inline-block;
+	vertical-align: middle;
+}
+
+.caret {
+    background: url(/images/icons/silk/caret.png) no-repeat;
+	background-position: center center;
+    width: 8px;
+    height: 16px;
     display: inline-block;
 }
 
@@ -255,36 +305,42 @@ body {
 .friends { grid-area: friends; }
 
 #profile {
-  padding: 0px;
-  width: 438px;
-  height: 127px;
+	padding: 0px;
+	width: 438px;
+	height: 127px;
 }
 #banner {
-  object-fit: cover;
-  width: 438px;
-  height: 78px;
-  border-bottom: 1px solid black;
-  position: static;
+	object-fit: cover;
+	width: 438px;
+	height: 78px;
+	border-bottom: 1px solid black;
+	position: static;
 }
 #profile-info {
-  padding: 6px;
+	padding: 6px;
 }
 #profile-picture {
-  border: 1px solid black;
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  bottom: -32px;
+	border: 1px solid black;
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	bottom: -32px;
+        background-color: #fff;
 }
 #pfp-container {
-  width: 64px;
-  position: relative;
+	width: 64px;
+	position: relative;
 }
 #info-container {
   position: relative;
   left: 71px;
   top: -2px;
+  max-width: 357px;
 }
+#info-container .btn-group {
+	float: right;
+}
+
 .white-box {
 	margin-top: 5px;
 	border: 1px Solid black;
@@ -300,6 +356,55 @@ body {
 }
 
 #info-container a {
-text-decoration: none;
-color: black;
+	text-decoration: none;
+	color: black;
+}
+
+#indent {
+	white-space: pre-wrap;
+	padding-left: 0px;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	right: 0;
+	margin-top: 3px;
+	background-color: #fff;
+	border: 1px solid black;
+	border-bottom: none;
+	min-width: 160px;
+	font-size: 10px;
+}
+
+.dropdown li {
+	padding: 3px;
+	border-bottom: 1px solid black;
+}
+
+.dropdown li:hover {
+	background-color: #D9D9DB;
+}
+
+.dropdown span {
+	vertical-align: middle;
+}
+
+.dropdown ul {
+	margin: 0;
+	padding: 0;
+	list-style: inside none;
+}
+
+.btn-group .dropdown-toggle {
+	margin-left: -1px;
+}
+
+.dropdown.show {
+	display: block
+}
+
+.dropdown-btn {
+	display: inline-block;
+	position: relative;
 }

@@ -1,0 +1,18 @@
+<html>
+   <head>
+      <title>clitorizweb</title>
+      <link rel="stylesheet" href="styles/main.css">
+      <link rel="shortcut icon" href="/favicon.ico" />
+   </head>
+   <body>
+      
+         <?php require("lib/require/header/header.php"); ?>
+         <table class="hmcontainer" width="440">
+            <tbody>
+               <td class="hmcontainer2"><font size="+1"><b>Welcome, d</b></font></font></td>
+            </tbody>
+         </table>
+         <?php require("lib/require/footer/footer.php"); ?>
+      
+   </body>
+</html>

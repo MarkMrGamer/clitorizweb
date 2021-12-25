@@ -20,7 +20,7 @@
 <?php } ?>
 </head>
 <body>
-<?php CusHtml_getHtml($details["username"],1,$conn); ?>
+	<?php CusHtml_getHtml($details["username"],1,$conn); ?>
 <?php require("lib/require/header/header.php"); ?>
 <?php CusHtml_getHtml($details["username"],2,$conn); ?>
 <?php if ($details["old_header"] == "true") { ?>
@@ -52,6 +52,28 @@
 <img id="profile-picture" src="<?php require("lib/pfp2.php"); ?>">
 </div>
 <div id="info-container" style="">
+<div class="btn-group">
+<?php
+if (isset($_SESSION["user"]) && $details["username"] == $_SESSION["user"]) {
+?>	
+<?php
+} else {
+?>
+<?php require("lib/friend.php"); ?>
+<div class="dropdown-btn">
+<button onclick="toggledropdown()" class="dropdown-toggle"><div class="caret"></div></button>
+<div id="moredropdown" class="dropdown">
+	<ul>
+		<a href="report.php?user=<?php echo $details["username"]; ?>"><li><div class="reporticon"></div> <span>Report <?php echo $details["username"]; ?>...</span></li></a>
+		<a href="block.php?user=<?php echo $details["username"]; ?>"><li><div class="blockicon"></div> <span>Block User</span></li></a>
+		<?php if (!isset($_SESSION["user"])) ?><?php if (isset($_SESSION["user"])) { if ($user["badge"] == "administrator") { ?><a href="admin/ban.php?name=<?php echo $row['username']; ?>"><li><div class="binicon"></div> <span>Ban User</span></li></a><?php } elseif ($user["badge"] == "moderator") { ?><a href="mod/ban.php?name=<?php echo $row['username']; ?>"><li><div class="binicon"></div> <span>Ban User</span></li></a><?php } } ?>
+	</ul>
+</div>
+</div>
+<?php
+}
+?>
+</div>
 <a href="profile.php?user=<?php echo $details["username"]; ?>"><font style="" size="+1"><?php if ($details['nickname'] == NULL) { echo $details['username']; } else { echo $details['nickname']; } ?></a> <img src="<?php $custom_badge = $details['custom_badge']; $badge = $details['badge']; require("lib/badge.php"); ?>"><br><font class="Profile" size="1"><b>@<?php echo $details["username"]; ?></b><?php if (isset($username)) { if ($user["badge"] == "administrator") { ?><font size="1" class="UserProfile"><a href="/admin/user.php?name=<?php echo $details["username"]; ?>">(Edit User)</a></font><?php } } ?></font>
 </div>
 </div>
@@ -106,59 +128,6 @@ About <?php echo $details["username"]; ?>
 </table>
 </div>
 <?php CusHtml_getHtml($details["username"],4,$conn); ?>
-<div class="contact">
-<table class="BorderStrip" width="205">
-<tbody>
-<tr class="blackstrip3" height="20">
-<td class="blackstrip3">Contact <?php echo $details["username"]; ?></td>
-</tr>
-<tr class="hmcontainer" height="55">
-<?php
-if (isset($_SESSION["user"]) && $details["username"] == $_SESSION["user"]) {
-?>
-<td class="hmcontainer2" align="center">
-<table>
-<tbody>
-<font class="UserProfile" size="-2" style="text-align: center;">This is you!</font>
-<?php
-} else {
-?>
-<td class="hmcontainer2">
-<table>
-<tbody>
-<tr>
-<td>
-<font class="UserProfile" size="-2"><?php require("lib/friend.php"); ?></font>
-<td>
-<font class="UserProfile" size="-2"><div class="messageicon"></div> <a href="message.php?user=<?php echo $details["username"]; ?>">Message</a>
-</font>
-</td>
-</tr>
-<tr>
-<td>
-<font class="UserProfile" size="-2"><div class="reporticon"></div> <a href="report.php?user=<?php echo $details["username"]; ?>">Report</a>
-</font>
-</td>
-<td>
-<font class="UserProfile" size="-2"><div class="blockicon"></div> <a href="block.php?user=<?php echo $details["username"]; ?>">Block</a>
-</font>
-</td>
-</tr>
-<?php
-}
-?>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="friends">
 <?php
 if ($friend->num_rows > 0 OR $friend2->num_rows > 0) {
@@ -357,5 +326,6 @@ $row2 = $comment_author->fetch_assoc();
 <?php CusHtml_getHtml($details["username"],6,$conn); ?>
 <?php require("lib/require/footer/footer.php"); ?>
 <?php CusHtml_getHtml($details["username"],7,$conn); ?>
+<script src="dropdown.js"></script>
 </body>
 </html>

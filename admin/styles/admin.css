@@ -55,6 +55,12 @@ td.blackstrip {
     background-color: black;
 }
 
+hr {
+    height: 1px;
+    border: 0;
+    background-color: #000;
+}
+
 .blackstrip3 {
     background-color: black;
 }
@@ -177,6 +183,8 @@ td.hmcontainer3 {
 
 body {
 	background-color: gray;
+	margin: auto;
+	margin-top: 5px;
 }
 
 .banner {

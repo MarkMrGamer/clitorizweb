@@ -177,6 +177,14 @@ td.hmcontainer3 {
 
 body {
 	background-color: lightgray;
+	margin: auto;
+	margin-top: 5px;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background-color: #000;
 }
 
 .banner {

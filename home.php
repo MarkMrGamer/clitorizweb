@@ -13,7 +13,7 @@
          <?php require("lib/require/header/header.php"); ?>
          <table class="hmcontainer" width="440">
             <tbody>
-               <td class="hmcontainer2"><font size="+1"><b>Welcome, <?php echo $_SESSION["user"]; ?></b></font><br><br><img src="/images/icons/card.png"> <font class="UserProfile" size="-2"><a href="settings.php">Settings</a></font> 
+               <td class="hmcontainer2"><font size="+1"><b>Welcome, <?php echo $_SESSION["user"]; ?></b></font><br><br><div class="cogicon"></div> <font class="UserProfile" size="-2"><a href="settings.php">Settings</a></font> 
                <tr>
                   </td>
                </tr>
