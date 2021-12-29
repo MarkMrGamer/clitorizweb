@@ -30,7 +30,8 @@
             </tbody>
          </table>
          <div class="container">
-            <div>
+            <div class="column">
+            <div class="window">
                <table class="BorderStrip" width="225">
                   <tbody>
                      <tr class="blackstrip3" height="20">
@@ -72,31 +73,7 @@
                   </tbody>
                </table>
             </div>
-            <div>
-               <table width="210" class="BorderStrip">
-                  <tbody>
-                     <tr class="blackstrip3" height="20">
-                        <td class="blackstrip3">Group Status</td>
-                     </tr>
-                     <tr class="hmcontainer">
-                        <td class="hmcontainer2" valign="top">
-                           <table>
-                              <tbody>
-                                 <tr>
-                                    <td valign="top">
-                                       <font size="1"><b>Owner:</b> <?php echo $groups2["group_owner"]; ?></font><br>
-                                       <font size="1"><b>Members:</b> <?php $group_name1 = $groups2["group_name"]; require("lib/group_users.php"); ?></font><br>
-                                       <font size="1"><a href="edit_group.php?id=1">Edit Group</a></font>
-                                    </td>
-                                 </tr>
-                              </tbody>
-                           </table>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <div>
+            <div class="window">
                <table class="BorderStrip" width="225">
                   <tbody>
                      <tr class="blackstrip3" height="20">
@@ -150,7 +127,33 @@
                   </tbody>
                </table>
             </div>
-            <div>
+            </div>
+            <div class="column">
+            <div class="window">
+               <table width="210" class="BorderStrip">
+                  <tbody>
+                     <tr class="blackstrip3" height="20">
+                        <td class="blackstrip3">Group Status</td>
+                     </tr>
+                     <tr class="hmcontainer">
+                        <td class="hmcontainer2" valign="top">
+                           <table>
+                              <tbody>
+                                 <tr>
+                                    <td valign="top">
+                                       <font size="1"><b>Owner:</b> <?php echo $groups2["group_owner"]; ?></font><br>
+                                       <font size="1"><b>Members:</b> <?php $group_name1 = $groups2["group_name"]; require("lib/group_users.php"); ?></font><br>
+                                       <font size="1"><a href="edit_group.php?id=1">Edit Group</a></font>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div class="window">
                <table width="210" class="BorderStrip">
                   <tbody>
                      <tr class="blackstrip3" height="20">
@@ -189,6 +192,7 @@
                   </tbody>
                </table>
             </div>
+         </div></div>
          </div>
          <?php require("lib/require/footer/footer.php"); ?>
       
