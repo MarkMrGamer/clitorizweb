@@ -90,9 +90,13 @@ img.pfp {
 }
 
 .banner-image {
-    background-image: url(/images/banner.gif);
+    background-image: url(/images/newyrs.gif);
     width: 440px;
     height: 68px;
+}
+
+.banner_upsidedown {
+    display: none;
 }
 
 img.banner {
@@ -212,7 +216,7 @@ td.hmcontainer3 {
 }
 
 body {
-    background-color: #9AB7CE;
+    background-color: #595959;
     font-family: Verdana, Helvetica, Arial;
     padding: 0;
     width: 440px;
@@ -226,7 +230,8 @@ hr {
     background-color: #000;
 }
 
-.banner {
+.banner,
+.banner_upsidedown {
     border-spacing: 0;
     border-collapse: collapse;
 }
