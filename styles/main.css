@@ -16,7 +16,7 @@
     border-collapse: collapse;
     border-color: black;
     color: black;
-	border: 1px black solid;
+    border: 1px black solid;
 }
 
 .Profile {
@@ -34,14 +34,14 @@
 }
 
 .Profile a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .UserProfile a {
-	vertical-align: middle;
-	text-decoration: none;
-	color: black;
+    vertical-align: middle;
+    text-decoration: none;
+    color: black;
 }
 
 td.blackstrip {
@@ -83,11 +83,10 @@ td.blackstrip3 {
     padding-left: 3px;
 }
 
-
 img.pfp {
     border: black solid 1px;
-	width: 64px;
-	height: 64px;
+    width: 64px;
+    height: 64px;
 }
 
 .banner-image {
@@ -95,9 +94,10 @@ img.pfp {
     width: 440px;
     height: 68px;
 }
+
 img.banner {
-	width: 440px;
-	height: 68px;
+    width: 440px;
+    height: 68px;
 }
 
 td.blackstrip2 {
@@ -108,7 +108,6 @@ td.blackstrip2 {
     text-align: right;
     padding-right: 3px;
 }
-
 
 .blackstrip2 a {
     color: white;
@@ -133,13 +132,16 @@ td.blackstrip2 {
     font-family: Verdana;
     font-size: 12px;
 }
+
 audio {
-  background: #f1f3f4;
-  border: solid 1px black;
+    background: #f1f3f4;
+    border: solid 1px black;
 }
+
 video {
-  border: solid 1px black;
+    border: solid 1px black;
 }
+
 .updateText {
     background-color: white;
     border: black solid 1px;
@@ -149,7 +151,15 @@ video {
     font-size: 12px;
 }
 
-.loginSubmit, .updateSubmit, button {
+.updateText:focus {
+    outline: 0;
+    border: 2px solid black;
+}
+
+.loginSubmit,
+.updateSubmit,
+button,
+::-webkit-file-upload-button {
     border: black solid 1px;
     font-size: 11px;
     height: 23px;
@@ -158,9 +168,28 @@ video {
     background-color: #E9E9ED;
 }
 
-.loginSubmit:hover, .updateSubmit:hover, button:hover {
-	background-color: #D9D9DB;
-	border: #4F4F4F solid 1px;
+input[type=checkbox] {
+    vertical-align: middle;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 0;
+}
+
+input[type=checkbox]:checked {
+    background: no-repeat url(/images/checkmark.gif), #C3C3C3;
+    background-size: 9px 8px;
+    background-position: center center;
+}
+
+.loginSubmit:hover,
+.updateSubmit:hover,
+button:hover,
+::-webkit-file-upload-button:hover {
+    background-color: #D9D9DB;
+    border: #4F4F4F solid 1px;
 }
 
 td.hmcontainer2 {
@@ -183,12 +212,12 @@ td.hmcontainer3 {
 }
 
 body {
-	background-color: #9AB7CE;
-	font-family: Verdana, Helvetica, Arial;
-	padding: 0;
-	width: 440px;
-	margin: auto;
-	margin-top: 5px;
+    background-color: #9AB7CE;
+    font-family: Verdana, Helvetica, Arial;
+    padding: 0;
+    width: 440px;
+    margin: auto;
+    margin-top: 5px;
 }
 
 hr {
@@ -198,8 +227,8 @@ hr {
 }
 
 .banner {
-	border-spacing: 0;
-	border-collapse: collapse;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 .footer {
@@ -207,18 +236,21 @@ hr {
     height: 1px;
     background-color: black;
 }
+
 .container {
-  display: grid;
-  align-content: center;
-  grid-template-columns: 0.1fr 0.1fr;
-  gap: 8px 5px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "media-player about"
-    "contact friends";
-  width: 440px;
-  padding-bottom: 6px;
-  padding-top: 6px;
+    display: flex;
+    gap: 8px 5px;
+    width: 440px;
+    padding-bottom: 6px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column .window {
+    margin-top: 5px;
 }
 
 .friendicon {
@@ -240,19 +272,19 @@ hr {
     width: 16px;
     height: 16px;
     display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .pendingicon {
     background: url(/images/icons/silk/user_pending.png) no-repeat;
-	width: 16px;
+    width: 16px;
     height: 16px;
     display: inline-block;
 }
 
 .accepticon {
     background: url(/images/icons/silk/user_accept.png) no-repeat;
-	width: 16px;
+    width: 16px;
     height: 16px;
     display: inline-block;
 }
@@ -262,7 +294,7 @@ hr {
     width: 16px;
     height: 15px;
     display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .cogicon {
@@ -270,7 +302,7 @@ hr {
     width: 16px;
     height: 15px;
     display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .messageicon {
@@ -285,126 +317,145 @@ hr {
     width: 16px;
     height: 15px;
     display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .caret {
     background: url(/images/icons/silk/caret.png) no-repeat;
-	background-position: center center;
+    background-position: center center;
     width: 8px;
     height: 16px;
     display: inline-block;
 }
 
-.about { grid-area: about; }
+.contact a,
+.contact div {
+    vertical-align: middle;
+}
 
-.media-player { grid-area: media-player; }
+.about {
+    grid-area: about;
+}
 
-.contact { grid-area: contact; }
+.media-player {
+    grid-area: media-player;
+}
 
-.friends { grid-area: friends; }
+.contact {
+    grid-area: contact;
+}
+
+.friends {
+    grid-area: friends;
+}
 
 #profile {
-	padding: 0px;
-	width: 438px;
-	height: 127px;
+    padding: 0px;
+    width: 438px;
+    height: 127px;
 }
+
 #banner {
-	object-fit: cover;
-	width: 438px;
-	height: 78px;
-	border-bottom: 1px solid black;
-	position: static;
+    object-fit: cover;
+    width: 438px;
+    height: 78px;
+    border-bottom: 1px solid black;
+    position: static;
 }
+
 #profile-info {
-	padding: 6px;
+    padding: 6px;
 }
+
 #profile-picture {
-	border: 1px solid black;
-	width: 64px;
-	height: 64px;
-	position: absolute;
-	bottom: -32px;
-        background-color: #fff;
+    border: 1px solid black;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    bottom: -32px;
+    background-color: #fff;
 }
+
 #pfp-container {
-	width: 64px;
-	position: relative;
+    width: 64px;
+    position: relative;
 }
+
 #info-container {
-  position: relative;
-  left: 71px;
-  top: -2px;
-  max-width: 357px;
+    position: relative;
+    left: 71px;
+    top: -2px;
+    max-width: 357px;
 }
+
 #info-container .btn-group {
-	float: right;
+    float: right;
 }
 
 .white-box {
-	margin-top: 5px;
-	border: 1px Solid black;
-	background-color: white;
-	padding: 3px;
-	color: black;
+    margin-top: 5px;
+    border: 1px Solid black;
+    background-color: white;
+    padding: 3px;
+    color: black;
 }
 
 #main {
-	margin-left: auto;
-	margin-right: auto;
-	width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 440px;
 }
 
 #info-container a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 #indent {
-	white-space: pre-wrap;
-	padding-left: 0px;
+    white-space: pre-wrap;
+    padding-left: 0px;
 }
 
 .dropdown {
-	display: none;
-	position: absolute;
-	right: 0;
-	margin-top: 3px;
-	background-color: #fff;
-	border: 1px solid black;
-	border-bottom: none;
-	min-width: 160px;
-	font-size: 10px;
+    display: none;
+    position: absolute;
+    right: 0;
+    margin-top: 3px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-bottom: none;
+    min-width: 160px;
+    font-size: 10px;
 }
 
 .dropdown li {
-	padding: 3px;
-	border-bottom: 1px solid black;
+    padding: 3px;
+    border-bottom: 1px solid black;
 }
 
 .dropdown li:hover {
-	background-color: #D9D9DB;
+    background-color: #D9D9DB;
 }
 
 .dropdown span {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .dropdown ul {
-	margin: 0;
-	padding: 0;
-	list-style: inside none;
+    margin: 0;
+    padding: 0;
+    list-style: inside none;
 }
 
 .btn-group .dropdown-toggle {
-	margin-left: -1px;
+    margin-left: -1px;
 }
 
 .dropdown.show {
-	display: block
+    display: block
 }
 
 .dropdown-btn {
-	display: inline-block;
-	position: relative;
+    display: inline-block;
+    position: relative;
 }
