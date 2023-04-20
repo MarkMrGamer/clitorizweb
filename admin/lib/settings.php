@@ -74,6 +74,12 @@ if (isset($_POST["update"])) {
 		$bio = htmlspecialchars($_POST["bio"]);
 		$nickname = $details["nickname"];
 		UpdateProfile($nickname, $username, $status, $bio, $newcss, $conn);
+		
+		if(isset($_POST['videoaccess'])) { 
+			UpdateVideoAccess("true", $username, $conn);
+		} else { 
+			UpdateVideoAccess("false", $username, $conn);
+		}
 		// add log 
 		$user_log = $_SESSION['user'];
 		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
