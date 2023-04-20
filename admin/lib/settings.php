@@ -89,7 +89,7 @@ if (isset($_POST["update"])) {
 			$_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
 		}
 		AddLog("<b>$user_log</b> updated $username", $ip, $conn);
-	//	header("Location: settings.php?name=" . $username);
+		header("Location: settings.php?name=" . $username);
 	}
 }
 ?>
