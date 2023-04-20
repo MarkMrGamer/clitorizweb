@@ -22,7 +22,15 @@
                         <label>status:</label> <input class="UpdateText" type="text" name="status" value="<?php echo $details["status"]; ?>"><br><br>
                         <label style="vertical-align: top;">css:</label> <textarea name="css" class="UpdateText" style="width:300px;height:100px;"><?php echo $details["css"]; ?></textarea><br><br>
                         <label style="vertical-align: top;">bio:</label> <textarea name="bio" class="UpdateText" style="width:300px;height:100px;"><?php echo $details["bio"]; ?></textarea><br>
-                        <br><br><input class="updateSubmit" type="submit" name="update" value="Update">
+						<label style="vertical-align: top;">video access:</label><input type="checkbox" name="videoaccess" 
+						<?php 
+						$hasvaccess = filter_var($details["video_access"], FILTER_VALIDATE_BOOLEAN);
+						if ($hasvaccess == true) {
+							echo 'value="'. $hasvaccess. '" checked'; 
+						} ?>
+						><br>
+                     
+					 <br><br><input class="updateSubmit" type="submit" name="update" value="Update">
                      </form>
                      <br>
                      <?php require("lib/settings/counter.php"); ?>
