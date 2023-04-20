@@ -184,6 +184,12 @@ function UpdateProfilePicture($pfp, $username, $conn) {
 	$query->execute();
 	return true;
 }
+function UpdateVideoAccess($vac, $username, $conn) {
+	$query = $conn->prepare("UPDATE clitorizweb_users SET video_access = ? WHERE username = ?");
+	$query->bind_param("ss", $vac, $username); 
+	$query->execute();
+	return true;
+}
 function UpdateUsersZeroSong($song_id, $user_song, $conn) {
 	$query = $conn->prepare("UPDATE clitorizweb_users SET song = ? WHERE username = ?");
 	$query->bind_param("is", $song_id, $user_song); 
