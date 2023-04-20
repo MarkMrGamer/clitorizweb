@@ -3,6 +3,8 @@
 // makes administrator able to play with users
 
 $counter = 0;
+$cuser = $user;
+
 
 if (!isset($_GET["name"]) && !isset($_GET["reset_password"])) {
 	header("Location: user.php");
@@ -27,7 +29,7 @@ if (isset($_GET["name"])) {
 }
 
 if (isset($_GET["reset_password"])) {
-	if ($user["badge"] != "administrator") {
+	if ($cuser["badge"] != "administrator") {
 		header("Location: /index.php"); 
 	} else {
 		$name = htmlspecialchars($_GET["reset_password"]);
@@ -62,7 +64,7 @@ if (isset($_GET["reset_password"])) {
 
 
 if (isset($_POST["update"])) {
-	if ($user["badge"] != "administrator") {
+	if ($cuser["badge"] != "administrator") {
 		header("Location: /index.php"); 
 	} else {
 		$username = $_GET["name"];
@@ -87,7 +89,7 @@ if (isset($_POST["update"])) {
 			$_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
 		}
 		AddLog("<b>$user_log</b> updated $username", $ip, $conn);
-		header("Location: settings.php?name=" . $username);
+	//	header("Location: settings.php?name=" . $username);
 	}
 }
 ?>
