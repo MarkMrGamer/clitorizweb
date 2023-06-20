@@ -18,8 +18,7 @@
                      <b>PHP version:<b> <?php echo phpversion() ?><br><br>
                      <b>FFMPEG version:<b> <?php echo str_replace("ffmpeg version ", "", substr( shell_exec('ffmpeg -version') , 0, strpos( shell_exec('ffmpeg -version') , "Copyright (c)"))) ?><br><br>
                      <b>OS version:<b> <?php echo php_uname() ?><br><br>
-                    
-                     <b>CPU usage:</b> <?php echo $cpu['sys'] . "%"; ?><br><br>
+                     <?php if ($cpu['sys'] != 0) { echo "<b>CPU usage: " . $cpu['sys'] . "%</b><br><br> "; } ?>
                   </td>
                </tr>
             </tbody>

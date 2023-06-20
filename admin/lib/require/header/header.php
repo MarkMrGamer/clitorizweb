@@ -1,5 +1,5 @@
 
-
+<center>
 <table class="banner" width="440">
    <tbody>
       <tr class="blackstrip" height="20">
