@@ -13,10 +13,12 @@ if (isset($_SESSION["user"])) {
 	    header("Location: banned.php");
     }
 	
-	if ($banned["ban_date"] < date("Y-m-d H:i:s")) {
-	    $ban = "false";
-        ChangeBan($username, $ban, $conn);
-    }
+	if (!empty($banned)) {
+		if ($banned["ban_date"] < date("Y-m-d H:i:s")) {
+			$ban = "false";
+			ChangeBan($username, $ban, $conn);
+		}
+	}
 }
 
 if (isset($_SESSION["user"])) { 
