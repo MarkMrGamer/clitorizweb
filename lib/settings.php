@@ -100,7 +100,7 @@ $tmpfile = str_replace(".mp4", "temp.".$videoFileType, $newfile);
 $flvfile = str_replace(".mp4", ".flv", $newfile);
 if (move_uploaded_file($_FILES["fileupload3"]["tmp_name"], $tmpfile)) {
 exec("ffmpeg -i ".$tmpfile." -vcodec libx264 -acodec aac ".$newfile);
-exec("ffmpeg -i ".$newfile." -vcodec flv ".$flvfile);
+exec("ffmpeg -i ".$newfile." -vcodec flv -acodec mp3 ".$flvfile);
 UpdateVideoProfile($video, $username, $conn);
 unlink($tmpfile);
 header("Location: settings.php");
